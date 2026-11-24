@@ -1,0 +1,29 @@
+{
+  "hinweis": "SIMULIERT. Frei gesetzte Werte ohne Bezug zu realen Schulen oder Ergebnissen.",
+  "seed": 20261124,
+  "basis_logit": {
+    "L1": 0.45,
+    "L2": 0.05,
+    "L3": -0.25,
+    "L4": 0.25,
+    "L5": 0.1
+  },
+  "zuwachs_logit": {
+    "L1": 0.45,
+    "L2": 0.3,
+    "L3": 0.5,
+    "L4": 0.1,
+    "L5": 0.25
+  },
+  "effekt_gesamtschule": 0.2,
+  "effekt_staedtisch": 0.0,
+  "sd_schule": 0.2,
+  "sd_klasse": 0.15,
+  "sd_kind": 0.8,
+  "sd_kind_leitidee": 0.35,
+  "sd_anlass": 0.25,
+  "anteil_fehlend": {
+    "T1": 0.02,
+    "T2": 0.05
+  }
+}

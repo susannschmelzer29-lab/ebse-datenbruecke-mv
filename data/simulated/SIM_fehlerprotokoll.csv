@@ -1,0 +1,201 @@
+roh_zeile,regel_id,art
+124,DQ08,abweichendes Zahlen- oder Datumsformat
+148,DQ08,abweichendes Zahlen- oder Datumsformat
+158,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+282,DQ05,ungültiges oder unmögliches Datum
+303,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+304,DQ04,abweichende Schulartbezeichnung
+325,DQ08,abweichendes Zahlen- oder Datumsformat
+360,DQ06,Kind-ID fehlt
+374,DQ04,abweichende Schulartbezeichnung
+384,DQ04,abweichende Schulartbezeichnung
+429,DQ05,ungültiges oder unmögliches Datum
+465,DQ05,ungültiges oder unmögliches Datum
+507,DQ01,Punktwert fehlt
+555,DQ05,ungültiges oder unmögliches Datum
+562,DQ04,abweichende Schulartbezeichnung
+577,DQ09,Metadatum fehlt
+580,DQ08,abweichendes Zahlen- oder Datumsformat
+610,DQ04,abweichende Schulartbezeichnung
+661,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+669,DQ08,abweichendes Zahlen- oder Datumsformat
+698,DQ08,abweichendes Zahlen- oder Datumsformat
+700,DQ09,Metadatum fehlt
+731,DQ01,Punktwert fehlt
+753,DQ01,Punktwert fehlt
+771,DQ04,abweichende Schulartbezeichnung
+829,DQ04,abweichende Schulartbezeichnung
+847,DQ03,Punkte außerhalb 0 bis 20
+866,DQ03,Punkte außerhalb 0 bis 20
+879,DQ03,Punkte außerhalb 0 bis 20
+905,DQ08,abweichendes Zahlen- oder Datumsformat
+967,DQ05,ungültiges oder unmögliches Datum
+971,DQ04,abweichende Schulartbezeichnung
+989,DQ04,abweichende Schulartbezeichnung
+992,DQ08,abweichendes Zahlen- oder Datumsformat
+994,DQ01,Punktwert fehlt
+1009,DQ01,Punktwert fehlt
+1022,DQ04,abweichende Schulartbezeichnung
+1027,DQ04,abweichende Schulartbezeichnung
+1104,DQ08,abweichendes Zahlen- oder Datumsformat
+1152,DQ01,Punktwert fehlt
+1190,DQ01,Punktwert fehlt
+1237,DQ01,Punktwert fehlt
+1248,DQ01,Punktwert fehlt
+1308,DQ08,abweichendes Zahlen- oder Datumsformat
+1332,DQ04,abweichende Schulartbezeichnung
+1344,DQ01,Punktwert fehlt
+1375,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+1390,DQ02,widersprüchliches Duplikat
+1402,DQ06,Kind-ID fehlt
+1407,DQ04,abweichende Schulartbezeichnung
+1448,DQ08,abweichendes Zahlen- oder Datumsformat
+1520,DQ03,Punkte außerhalb 0 bis 20
+1554,DQ08,abweichendes Zahlen- oder Datumsformat
+1629,DQ06,Kind-ID fehlt
+1653,DQ09,Metadatum fehlt
+1675,DQ05,ungültiges oder unmögliches Datum
+1724,DQ09,Metadatum fehlt
+1726,DQ08,abweichendes Zahlen- oder Datumsformat
+1787,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+1877,DQ01,Punktwert fehlt
+1893,DQ08,abweichendes Zahlen- oder Datumsformat
+1952,DQ05,ungültiges oder unmögliches Datum
+1997,DQ04,abweichende Schulartbezeichnung
+2054,DQ01,Punktwert fehlt
+2118,DQ02,widersprüchliches Duplikat
+2165,DQ08,abweichendes Zahlen- oder Datumsformat
+2176,DQ02,widersprüchliches Duplikat
+2184,DQ01,Punktwert fehlt
+2230,DQ09,Metadatum fehlt
+2282,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+2287,DQ08,abweichendes Zahlen- oder Datumsformat
+2293,DQ06,Kind-ID fehlt
+2329,DQ08,abweichendes Zahlen- oder Datumsformat
+2363,DQ06,Kind-ID fehlt
+2406,DQ01,Punktwert fehlt
+2439,DQ01,Punktwert fehlt
+2465,DQ04,abweichende Schulartbezeichnung
+2489,DQ03,Punkte außerhalb 0 bis 20
+2522,DQ01,Punktwert fehlt
+2565,DQ01,Punktwert fehlt
+2583,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+2598,DQ04,abweichende Schulartbezeichnung
+2630,DQ01,Punktwert fehlt
+2635,DQ04,abweichende Schulartbezeichnung
+2659,DQ03,Punkte außerhalb 0 bis 20
+2724,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+2727,DQ08,abweichendes Zahlen- oder Datumsformat
+2785,DQ01,Punktwert fehlt
+2828,DQ05,ungültiges oder unmögliches Datum
+2889,DQ06,Kind-ID fehlt
+2895,DQ06,Kind-ID fehlt
+2942,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+2964,DQ09,Metadatum fehlt
+2971,DQ09,Metadatum fehlt
+2988,DQ01,Punktwert fehlt
+2990,DQ04,abweichende Schulartbezeichnung
+2996,DQ08,abweichendes Zahlen- oder Datumsformat
+3038,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+3062,DQ01,Punktwert fehlt
+3078,DQ05,ungültiges oder unmögliches Datum
+3084,DQ04,abweichende Schulartbezeichnung
+3116,DQ04,abweichende Schulartbezeichnung
+3120,DQ03,Punkte außerhalb 0 bis 20
+3156,DQ04,abweichende Schulartbezeichnung
+3174,DQ01,Punktwert fehlt
+3263,DQ04,abweichende Schulartbezeichnung
+3273,DQ04,abweichende Schulartbezeichnung
+3298,DQ08,abweichendes Zahlen- oder Datumsformat
+3357,DQ04,abweichende Schulartbezeichnung
+3371,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+3398,DQ04,abweichende Schulartbezeichnung
+3429,DQ08,abweichendes Zahlen- oder Datumsformat
+3432,DQ01,Punktwert fehlt
+3450,DQ04,abweichende Schulartbezeichnung
+3465,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+3467,DQ04,abweichende Schulartbezeichnung
+3505,DQ08,abweichendes Zahlen- oder Datumsformat
+3537,DQ01,Punktwert fehlt
+3574,DQ04,abweichende Schulartbezeichnung
+3577,DQ08,abweichendes Zahlen- oder Datumsformat
+3600,DQ08,abweichendes Zahlen- oder Datumsformat
+3603,DQ04,abweichende Schulartbezeichnung
+3688,DQ01,Punktwert fehlt
+3718,DQ09,Metadatum fehlt
+3719,DQ08,abweichendes Zahlen- oder Datumsformat
+3723,DQ04,abweichende Schulartbezeichnung
+3784,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+3813,DQ03,Punkte außerhalb 0 bis 20
+3816,DQ08,abweichendes Zahlen- oder Datumsformat
+3846,DQ03,Punkte außerhalb 0 bis 20
+3983,DQ04,abweichende Schulartbezeichnung
+4003,DQ06,Kind-ID fehlt
+4030,DQ04,abweichende Schulartbezeichnung
+4052,DQ08,abweichendes Zahlen- oder Datumsformat
+4062,DQ04,abweichende Schulartbezeichnung
+4065,DQ03,Punkte außerhalb 0 bis 20
+4075,DQ04,abweichende Schulartbezeichnung
+4132,DQ01,Punktwert fehlt
+4140,DQ02,widersprüchliches Duplikat
+4212,DQ01,Punktwert fehlt
+4220,DQ04,abweichende Schulartbezeichnung
+4264,DQ04,abweichende Schulartbezeichnung
+4295,DQ05,ungültiges oder unmögliches Datum
+4328,DQ09,Metadatum fehlt
+4333,DQ05,ungültiges oder unmögliches Datum
+4339,DQ08,abweichendes Zahlen- oder Datumsformat
+4349,DQ06,Kind-ID fehlt
+4414,DQ08,abweichendes Zahlen- oder Datumsformat
+4453,DQ08,abweichendes Zahlen- oder Datumsformat
+4462,DQ08,abweichendes Zahlen- oder Datumsformat
+4629,DQ05,ungültiges oder unmögliches Datum
+4646,DQ04,abweichende Schulartbezeichnung
+4653,DQ08,abweichendes Zahlen- oder Datumsformat
+4707,DQ05,ungültiges oder unmögliches Datum
+4747,DQ03,Punkte außerhalb 0 bis 20
+4752,DQ03,Punkte außerhalb 0 bis 20
+4802,DQ01,Punktwert fehlt
+4813,DQ05,ungültiges oder unmögliches Datum
+4818,DQ01,Punktwert fehlt
+4871,DQ03,Punkte außerhalb 0 bis 20
+4894,DQ08,abweichendes Zahlen- oder Datumsformat
+4947,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+5043,DQ03,Punkte außerhalb 0 bis 20
+5091,DQ04,abweichende Schulartbezeichnung
+5182,DQ08,abweichendes Zahlen- oder Datumsformat
+5183,DQ04,abweichende Schulartbezeichnung
+5196,DQ05,ungültiges oder unmögliches Datum
+5302,DQ07,Klassenstufe passt nicht zum Messzeitpunkt
+5303,DQ08,abweichendes Zahlen- oder Datumsformat
+5308,DQ04,abweichende Schulartbezeichnung
+5397,DQ06,Kind-ID fehlt
+5507,DQ01,Punktwert fehlt
+5514,DQ08,abweichendes Zahlen- oder Datumsformat
+5549,DQ02,widersprüchliches Duplikat
+5582,DQ08,abweichendes Zahlen- oder Datumsformat
+5693,DQ03,Punkte außerhalb 0 bis 20
+5696,DQ09,Metadatum fehlt
+5715,DQ08,abweichendes Zahlen- oder Datumsformat
+5734,DQ08,abweichendes Zahlen- oder Datumsformat
+5779,DQ08,abweichendes Zahlen- oder Datumsformat
+5792,DQ02,exaktes Duplikat
+5793,DQ02,exaktes Duplikat
+5794,DQ02,exaktes Duplikat
+5795,DQ02,exaktes Duplikat
+5796,DQ02,exaktes Duplikat
+5797,DQ02,exaktes Duplikat
+5798,DQ02,exaktes Duplikat
+5799,DQ02,exaktes Duplikat
+5800,DQ02,exaktes Duplikat
+5801,DQ02,exaktes Duplikat
+5802,DQ02,exaktes Duplikat
+5803,DQ02,exaktes Duplikat
+5804,DQ02,exaktes Duplikat
+5805,DQ02,exaktes Duplikat
+5806,DQ02,exaktes Duplikat
+5807,DQ02,widersprüchliches Duplikat
+5808,DQ02,widersprüchliches Duplikat
+5809,DQ02,widersprüchliches Duplikat
+5810,DQ02,widersprüchliches Duplikat
+5811,DQ02,widersprüchliches Duplikat
