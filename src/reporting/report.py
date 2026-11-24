@@ -128,6 +128,16 @@ def tab_abgleich(abgleich):
                          "stimmt überein": [bool(x) for x in abgleich.stimmt]})
 
 
+def tab_testlaenge(datei="SIM_testlaenge_je_leitidee.csv"):
+    """Ergebnis von src.analytics.testlaenge (eigenes Experiment)."""
+    t = pd.read_csv(REPORTS / datei)
+    return pd.DataFrame({"Aufgaben je Leitidee": t.get("aufgaben_je_leitidee", t.aufgaben),
+                         "Bereich berührt Bandgrenze %": t.unsicher_prozent,
+                         "falsches Band %": t.falsch_prozent,
+                         "um zwei Bänder falsch %": t.zwei_baender_falsch_prozent,
+                         "halbe Intervallbreite": t.halbe_intervallbreite})
+
+
 # ------------------------------------------------------------- Berichte
 HINWEIS_SIM = ("**SIMULIERTE DATEN.** Alle Kinder und Schulen sind erfunden. Die Ergebnisse zeigen analytische "
                "Möglichkeiten und sagen nichts über tatsächliche Kinder, Schulen oder das Land aus.")
@@ -223,8 +233,20 @@ Stichprobengröße, kein Beleg für „kein Unterschied“.
 ![Einstufungssicherheit](grafiken/6_einstufungssicherheit.png)
 
 Bei {_z(float(s2.min()), 0)} bis {_z(float(s2.max()), 0)} Prozent der fiktiven Kinder reicht der 95-%-Bereich ihres
-Ergebnisses über eine Bandgrenze (Beginn Klasse 6). Für Gruppenaussagen ist der Test brauchbar, für die Einstufung
-einzelner Kinder nicht. Ein einzelnes Band darf deshalb nie allein eine Förderentscheidung begründen.
+Ergebnisses über eine Bandgrenze (Beginn Klasse 6). Das heißt nicht, dass ihre Einstufung falsch ist, sondern dass
+der Test das benachbarte Band nicht ausschließt. Wie oft die Einstufung tatsächlich falsch ist, zeigt der folgende
+Vergleich, denn in der Simulation ist der wahre Lösungsanteil bekannt (40.000 fiktive Kinder je Testlänge).
+
+**Einstufung je Leitidee**
+
+{md(tab_testlaenge())}
+**Einstufung über alle fünf Leitideen zusammen**
+
+{md(tab_testlaenge("SIM_testlaenge_gesamt.csv"))}
+Mehr Aufgaben helfen, aber langsam: Von 20 auf 40 Aufgaben je Leitidee sinkt der Anteil falscher Bänder nur um rund
+ein Viertel, der Test verdoppelt sich auf 200 Aufgaben. Das Gesamtergebnis aus 5 mal 20 Aufgaben ist
+treffsicherer als jede einzelne Leitidee mit 40 Aufgaben. Für Gruppenmittel wurde die Testlänge nicht untersucht. Ein Band allein darf
+keine Förderentscheidung begründen.
 
 ## 6. Reale Aggregate: Klasse 9, getrennt von der Simulation
 
@@ -296,7 +318,10 @@ weist das IQB für Mecklenburg-Vorpommern keine Ergebnisse aus. Ein Verlauf von 
 {bild("5_gruppen")}{klapp("Werte", tabelle(tab_gruppen(r)))}
 {bild("6_einstufungssicherheit")}
 <p>Bei {_z(float(s2.min()), 0)} bis {_z(float(s2.max()), 0)} Prozent der fiktiven Kinder reicht die Messunsicherheit über eine
-Bandgrenze. Gruppenaussagen sind möglich, sichere Einzeleinstufungen nicht.</p>{sim}
+Bandgrenze. Das heißt nicht, dass die Einstufung falsch ist, sondern dass der Test das Nachbarband nicht ausschließt.
+Tatsächlich falsch wäre das Band je Leitidee in rund {_z(float(tab_testlaenge().set_index("Aufgaben je Leitidee").loc[20, "falsches Band %"]), 0)} Prozent der Fälle.</p>
+<h3>Wie viel bringen mehr Aufgaben?</h3><p>Einstufung je Leitidee:</p>{tabelle(tab_testlaenge())}
+<p>Einstufung über alle fünf Leitideen zusammen:</p>{tabelle(tab_testlaenge("SIM_testlaenge_gesamt.csv"))}{sim}
 </main></body></html>
 """
 

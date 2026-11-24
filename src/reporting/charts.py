@@ -141,7 +141,7 @@ def sicherheit(t):
     ax.set_xlim(0, 100)
     ax.grid(axis="y", visible=False)
     ax.set_xlabel("Anteil der Kinder in Prozent, deren 95-%-Bereich mindestens eine Bandgrenze enthält")
-    _fertig(fig, "6_einstufungssicherheit", "20 Aufgaben je Leitidee reichen für sichere Einzeleinstufungen nicht", SIM)
+    _fertig(fig, "6_einstufungssicherheit", "Bei 20 Aufgaben schließt der Test das Nachbarband meist nicht aus", SIM)
 
 
 def iqb(t):

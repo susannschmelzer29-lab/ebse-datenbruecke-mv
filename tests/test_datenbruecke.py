@@ -253,6 +253,24 @@ def test_wilson_bekannter_wert():
     assert u == pytest.approx(29.93, abs=0.01) and o == pytest.approx(70.07, abs=0.01)
 
 
+def test_testlaenge_mehr_aufgaben_weniger_fehler():
+    from src.analytics import testlaenge
+    for t in (testlaenge.je_leitidee(), testlaenge.gesamttest()):
+        assert t.falsch_prozent.is_monotonic_decreasing and t.unsicher_prozent.is_monotonic_decreasing
+    # sicher außerhalb aller Grenzen: wahr und gemessen im selben Band
+    d = testlaenge.kennwerte(np.array([400]), 400, np.array([1.0]))
+    assert d["falsch_prozent"] == 0 and d["unsicher_prozent"] == 0
+
+
+@real
+def test_testlaenge_passt_zum_hauptlauf(lauf):
+    from src.analytics import testlaenge
+    s = analysis.einstufungssicherheit(analysis.lade_sim(lauf["con"]))
+    s = s[s.zeitpunkt_id == "T2"]
+    haupt = (s.anteil * s.n).sum() / s.n.sum()
+    assert testlaenge.je_leitidee().set_index("aufgaben").unsicher_prozent[20] == pytest.approx(haupt, abs=4)
+
+
 @real
 def test_zwei_laeufe_sind_identisch(lauf, tmp_path):
     zwei = verarbeite(tmp_path / "b.sqlite", log=lambda *_: None)

@@ -32,12 +32,14 @@ Die Empfehlungen stammten jeweils vom KI-Assistenten, die Entscheidung von der P
 | KI-6 | pypdf zusätzlich zu openpyxl (**Abweichung vom Plan**, zur Kenntnis PL) | Q4 liegt nur als PDF vor |
 | KI-7 | Startwert nicht angepasst, obwohl L5 den gesetzten Wert verfehlt | Ergebnisse nicht zurechtrücken |
 | KI-8 | Analyse der Einstufungssicherheit ergänzt | Bänder ohne Unsicherheit wären irreführend |
+| KI-9 | Testlänge 10 bis 100 Aufgaben verglichen (Auftrag PL: 40 Aufgaben testen), Hauptlauf unverändert bei 20 | Entscheidung vorbereiten |
+| KI-10 | Darstellung korrigiert: „Bereich berührt Bandgrenze“ (über 80 %) ist nicht „falsch eingestuft“ (rund 26 %) | erste Fassung war missverständlich |
 
 ## Offen für die Projektleitung
 
 | Nr. | Frage |
 |---|---|
-| O-1 | Mehr Aufgaben oder breitere Bänder, weil Einzeleinstufungen unsicher sind? |
+| O-1 | Testlänge: bei 20 bleiben und Einzelaussagen nur über das Gesamtergebnis (Empfehlung KI) oder 40 Aufgaben? |
 | O-2 | Punkte und Gewichte der Entscheidungsmatrix bestätigen |
 | O-3 | Lizenz für den Programmcode |
 | O-4 | Sollen die Dateifehler dem IQB gemeldet werden? |

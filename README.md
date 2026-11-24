@@ -19,7 +19,7 @@ Kompetenzentwicklungen transparent und reproduzierbar auswertbar sind?
 | Bedeutet gleicher Name gleicher Inhalt? | Nein. „Schülerzahl Klasse 5“: 15.248 oder 14.539, je nach Tabelle |
 | Gibt es öffentliche Kompetenzdaten für Klasse 5/6? | Keine gefunden. Für Klasse 4 (2021) weist das IQB für M-V keine Ergebnisse aus |
 | Dürfen alle Werte verglichen werden? | Nein. Ohne begründete Freigabe weist das System jeden Vergleich ab |
-| Taugt ein Kurztest zur Einzeleinstufung? | In der Simulation nicht: Bei über 80 % der fiktiven Kinder ist das Band unsicher |
+| Taugt ein Kurztest zur Einzeleinstufung? | In der Simulation nur begrenzt: Mit 20 Aufgaben je Leitidee wäre rund jedes vierte Band falsch, mit 40 Aufgaben knapp jedes fünfte |
 
 ## Ansehen
 
@@ -44,6 +44,8 @@ python -m venv .venv
 ```powershell
 .venv\Scripts\python.exe -m pytest
 ```
+
+Zusatzexperimente: `python -m src.analytics.testlaenge` und `python -m src.analytics.coverage`.
 
 Der Gesamtlauf dauert etwa 15 Sekunden und erzeugt Datenbank, Grafiken und Berichte neu.
 
@@ -70,7 +72,7 @@ Rohdaten (unverändert, SHA-256)           Simulation (fester Startwert)
 | `data/simulated` | simulierte Daten, Fehlerprotokoll, Parameter |
 | `database` | Schema und Beispielabfragen |
 | `src` | Programmcode |
-| `tests` | 34 automatisierte Tests |
+| `tests` | 36 automatisierte Tests |
 | `docs`, `reports`, `dashboard` | Dokumentation und Ergebnisse |
 
 ## Arbeitsweise

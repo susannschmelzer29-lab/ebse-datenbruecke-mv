@@ -67,8 +67,34 @@ Stichprobengröße, kein Beleg für „kein Unterschied“.
 ![Einstufungssicherheit](grafiken/6_einstufungssicherheit.png)
 
 Bei 82 bis 86 Prozent der fiktiven Kinder reicht der 95-%-Bereich ihres
-Ergebnisses über eine Bandgrenze (Beginn Klasse 6). Für Gruppenaussagen ist der Test brauchbar, für die Einstufung
-einzelner Kinder nicht. Ein einzelnes Band darf deshalb nie allein eine Förderentscheidung begründen.
+Ergebnisses über eine Bandgrenze (Beginn Klasse 6). Das heißt nicht, dass ihre Einstufung falsch ist, sondern dass
+der Test das benachbarte Band nicht ausschließt. Wie oft die Einstufung tatsächlich falsch ist, zeigt der folgende
+Vergleich, denn in der Simulation ist der wahre Lösungsanteil bekannt (40.000 fiktive Kinder je Testlänge).
+
+**Einstufung je Leitidee**
+
+| Aufgaben je Leitidee | Bereich berührt Bandgrenze % | falsches Band % | um zwei Bänder falsch % | halbe Intervallbreite |
+|---|---|---|---|---|
+| 10 | 96,1 | 32,6 | 0,6 | 23,3 |
+| 20 | 85,7 | 25,9 | 0,1 | 17,7 |
+| 40 | 79,8 | 18,7 | 0,0 | 13,1 |
+| 60 | 70,9 | 15,4 | 0,0 | 10,9 |
+| 100 | 55,9 | 11,8 | 0,0 | 8,5 |
+
+**Einstufung über alle fünf Leitideen zusammen**
+
+| Aufgaben je Leitidee | Bereich berührt Bandgrenze % | falsches Band % | um zwei Bänder falsch % | halbe Intervallbreite |
+|---|---|---|---|---|
+| 10 | 79,8 | 17,4 | 0,0 | 12,0 |
+| 20 | 60,0 | 12,4 | 0,0 | 8,7 |
+| 40 | 44,0 | 9,0 | 0,0 | 6,2 |
+| 60 | 35,1 | 7,2 | 0,0 | 5,1 |
+| 100 | 27,2 | 5,6 | 0,0 | 3,9 |
+
+Mehr Aufgaben helfen, aber langsam: Von 20 auf 40 Aufgaben je Leitidee sinkt der Anteil falscher Bänder nur um rund
+ein Viertel, der Test verdoppelt sich auf 200 Aufgaben. Das Gesamtergebnis aus 5 mal 20 Aufgaben ist
+treffsicherer als jede einzelne Leitidee mit 40 Aufgaben. Für Gruppenmittel wurde die Testlänge nicht untersucht. Ein Band allein darf
+keine Förderentscheidung begründen.
 
 ## 6. Reale Aggregate: Klasse 9, getrennt von der Simulation
 

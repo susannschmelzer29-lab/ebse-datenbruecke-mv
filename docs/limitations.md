@@ -22,8 +22,13 @@
 
 ## Methode
 - Die drei Bänder sind **keine** amtlichen Kompetenzstufen und keine Mindeststandards.
-- **20 Aufgaben je Leitidee reichen für sichere Einzeleinstufungen nicht.** Bei über 80 Prozent der fiktiven Kinder reicht die
-  Messunsicherheit über eine Bandgrenze. Bänder eignen sich hier nur für Gruppen.
+- **20 Aufgaben je Leitidee reichen für sichere Einzeleinstufungen nicht.** Rund 26 Prozent der Bänder wären falsch, meist um
+  ein Band. Bei über 80 Prozent der fiktiven Kinder schließt der Test das Nachbarband nicht aus; das ist ein strengeres Maß
+  und nicht mit „falsch eingestuft“ gleichzusetzen. Bänder eignen sich hier vor allem für Gruppen.
+- **40 Aufgaben lösen das nicht:** rund 19 Prozent falsche Bänder bei 200 Aufgaben je Kind. Das Gesamtergebnis aus 5 mal 20
+  Aufgaben liegt bei rund 12 Prozent.
+- Diese Anteile gelten für die gesetzten Simulationsparameter und für Kinder, deren Leistung am Testtag fest ist.
+  Tagesform, Raten und ungleich schwere Aufgaben sind nicht getrennt modelliert.
 - Intervalle: Bootstrap über Schulen. Geplant waren Klassen; Schulen sind die richtige Einheit, weil Schulart und Raumtyp auf
   Schulebene liegen. Bei 12 Schulen sind die Intervalle eher zu schmal (Trefferquote 87 bis 96 statt 95 Prozent).
 - Eine von fünf Veränderungen (L5) verfehlt im Hauptlauf den gesetzten Wert knapp. Das wurde nicht nachjustiert.
