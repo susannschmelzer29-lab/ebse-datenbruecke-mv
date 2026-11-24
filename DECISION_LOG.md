@@ -1,0 +1,43 @@
+# Entscheidungslog
+
+**PL** = Projektleitung (fachliche Entscheidung), **KI** = technische Umsetzung durch den KI-Assistenten.
+
+## Fachliche Entscheidungen der Projektleitung
+
+| Nr. | Datum | Entscheidung | Begründung |
+|---|---|---|---|
+| PL-1 | 24.11.2026 | Reale Quellen Q1 bis Q4; Schulverzeichnis und Mikrodaten nicht | geprüft und zugänglich; Datenminimierung |
+| PL-2 | 24.11.2026 | Indikator: Lösungsanteil je Leitidee L1 bis L5, Bänder unter 50, 50 bis unter 75, ab 75 Prozent | am Rahmenplan benannt, bewusst keine amtlichen Stufen |
+| PL-3 | 24.11.2026 | Simulation: 12 fiktive Schulen, 600 Kinder, Beginn Klasse 5 und 6, ein Instrument | Vergleich nur mit gleichem Instrument sinnvoll |
+| PL-4 | 24.11.2026 | Gruppenmerkmale nur Schulart und Raumtyp | Datenminimierung; Förderbedarf wäre begründungspflichtige Ausnahme |
+| PL-5 | 24.11.2026 | Grundsatz „nicht vergleichbar“, Ausnahmen nur mit Freigabe | fachlich begründete Vergleichbarkeit |
+| PL-6 | 24.11.2026 | SQLite, pandas, Matplotlib, statischer HTML-Bericht; kein Docker, kein Streamlit | Reproduzierbarkeit vor Komplexität |
+| PL-7 | 24.11.2026 | Abruf der vier Dateien, Installation in eigener Umgebung | |
+| PL-8 | 24.11.2026 | Noreply-Adresse in Commits | Schutz der privaten E-Mail |
+| PL-9 | 24.11.2026 | Gate 2, real: F1 Ämterabgleich, F2/F5 IQB-Trend, F3/F4 M-V gegen Deutschland freigegeben | einzeln freigegeben, kein Ranking |
+| PL-10 | 24.11.2026 | Gate 2, simuliert: F6 Klasse 5 zu 6, F7 Gruppenvergleiche freigegeben | beschreibend, Mindestgröße 10 |
+| PL-11 | 24.11.2026 | Öffentliches Repository ohne persönliche Arbeitsunterlagen | |
+
+Die Empfehlungen stammten jeweils vom KI-Assistenten, die Entscheidung von der Projektleitung.
+
+## Technische Umsetzung und Festlegungen (KI)
+
+| Nr. | Festlegung | Begründung |
+|---|---|---|
+| KI-1 | Import über Spaltenverträge mit Abbruch bei Abweichung | verhindert still verschobene Spalten |
+| KI-2 | Schreibfehler nur über feste Aliasliste | kein unscharfes Raten |
+| KI-3 | Negative Standardfehler verwerfen, Wert behalten | Vorzeichen nicht raten |
+| KI-4 | Veränderungen des IQB übernehmen statt berechnen | veröffentlichte Standardfehler sind nicht aus Einzelwerten ableitbar |
+| KI-5 | Bootstrap über Schulen statt über Klassen (**Abweichung vom Plan**, zur Kenntnis PL) | Gruppenmerkmale liegen auf Schulebene |
+| KI-6 | pypdf zusätzlich zu openpyxl (**Abweichung vom Plan**, zur Kenntnis PL) | Q4 liegt nur als PDF vor |
+| KI-7 | Startwert nicht angepasst, obwohl L5 den gesetzten Wert verfehlt | Ergebnisse nicht zurechtrücken |
+| KI-8 | Analyse der Einstufungssicherheit ergänzt | Bänder ohne Unsicherheit wären irreführend |
+
+## Offen für die Projektleitung
+
+| Nr. | Frage |
+|---|---|
+| O-1 | Mehr Aufgaben oder breitere Bänder, weil Einzeleinstufungen unsicher sind? |
+| O-2 | Punkte und Gewichte der Entscheidungsmatrix bestätigen |
+| O-3 | Lizenz für den Programmcode |
+| O-4 | Sollen die Dateifehler dem IQB gemeldet werden? |

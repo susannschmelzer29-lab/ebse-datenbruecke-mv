@@ -1,0 +1,27 @@
+# Umgebung und Zwischenstände
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.vscode/
+
+# Rohdaten Dritter werden nicht weiterverbreitet (siehe docs/data_sources.md)
+data/raw/*
+!data/raw/README.md
+!data/raw/manifest.json
+
+# Erzeugte Ergebnisse, die aus Daten Dritter abgeleitet sind
+data/processed/*
+!data/processed/README.md
+*.sqlite
+
+# Zugangsdaten
+.env
+*.key
+*.pem
+
+# Persönliche Arbeitsunterlagen, nicht öffentlich
+MASTERPROMPT.md
+PROJEKTPLAN.md
+docs/intern/
+.claude/
