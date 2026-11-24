@@ -1,0 +1,30 @@
+{
+  "Q1": {
+    "datei": "Q1_destatis_allgemeinbildende_schulen_2025_26.xlsx",
+    "url": "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Bildung-Forschung-Kultur/Schulen/Publikationen/Downloads-Schulen/statistischer-bericht-allgemeinbildende-schulen-2110100267005.xlsx?__blob=publicationFile&v=3",
+    "sha256": "eda75dad30481b1b236dafb0692021ccdfc50eb25eac4267290edcd3ef213a2a",
+    "bytes": 8544009,
+    "abgerufen_utc": "2026-11-24T11:12:33+00:00"
+  },
+  "Q2": {
+    "datei": "Q2_iqb_bildungstrend_2024_tabellen.xlsx",
+    "url": "https://www.iqb.hu-berlin.de/media/documents/2026-06-26_IQB-Bildungtrend_2024_Zusatzmaterial_Tabellen.xlsx",
+    "sha256": "af5b477681a513e31db39ff3eb2d3a4b054ef7ba6686d15f36dd8e4c32c53658",
+    "bytes": 3456315,
+    "abgerufen_utc": "2026-11-24T11:12:34+00:00"
+  },
+  "Q3": {
+    "datei": "Q3_iqb_bildungstrend_2021_tabellen.xlsx",
+    "url": "https://www.iqb.hu-berlin.de/media/documents/IQB_Bildungstrend2021_Zusatzmaterial_Tabellen.xlsx",
+    "sha256": "677e3f858c65f3cdee5677aa8a46b90028ef5bef56b773135390b01e83619cee",
+    "bytes": 393649,
+    "abgerufen_utc": "2026-11-24T11:12:34+00:00"
+  },
+  "Q4": {
+    "datei": "Q4_statamt_mv_B1131_2025_00.pdf",
+    "url": "https://www.laiv-mv.de/static/LAIV/Statistik/Dateien/Publikationen/B%20I%20Allgemeinbildende%20Schulen/B%201131/B1131%202025%2000.pdf",
+    "sha256": "34fd01ca8a85f4af416289bdadecd4f9b009d64176bcf0d6e22e19ab9248d4d9",
+    "bytes": 1454712,
+    "abgerufen_utc": "2026-11-24T11:12:35+00:00"
+  }
+}
