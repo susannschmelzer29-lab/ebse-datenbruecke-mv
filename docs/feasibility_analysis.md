@@ -40,8 +40,9 @@ Vergleichbarkeit und Auswertung arbeiten über standardisierte, versionierte Sch
 
 ## 3. Entscheidungsmatrix
 
-Skala 1 (ungünstig) bis 5 (günstig). **Punkte und Gewichte sind ein begründeter Vorschlag, keine Messung.** Sie müssten mit
-IT und Fachreferaten überprüft werden.
+Skala 1 (ungünstig) bis 5 (günstig). **Punkte und Gewichte sind eine begründete Einschätzung, keine Messung.**
+Vorgeschlagen vom KI-Assistenten, bestätigt durch die Projektleitung am 24.11.2026. Für einen realen Einsatz müssten IT und
+Fachreferate sie überprüfen.
 
 | Kriterium | Gewicht % | A | B | C | Begründung der Spitzen- und Tiefwerte |
 |---|---|---|---|---|---|

@@ -17,6 +17,10 @@
 | PL-9 | 24.11.2026 | Gate 2, real: F1 Ämterabgleich, F2/F5 IQB-Trend, F3/F4 M-V gegen Deutschland freigegeben | einzeln freigegeben, kein Ranking |
 | PL-10 | 24.11.2026 | Gate 2, simuliert: F6 Klasse 5 zu 6, F7 Gruppenvergleiche freigegeben | beschreibend, Mindestgröße 10 |
 | PL-11 | 24.11.2026 | Öffentliches Repository ohne persönliche Arbeitsunterlagen | |
+| PL-12 | 24.11.2026 | Testlänge bleibt bei 20 Aufgaben je Leitidee | Vergleich der Testlängen (KI-9) |
+| PL-13 | 24.11.2026 | Punkte und Gewichte der Entscheidungsmatrix bestätigt | Vorschlag KI, siehe Machbarkeitsanalyse |
+| PL-14 | 24.11.2026 | Keine Meldung der Dateifehler an das IQB | Befunde bleiben im Datenqualitätsbericht dokumentiert |
+| PL-15 | 24.11.2026 | MIT-Lizenz für den Programmcode | Inhalte der Herausgeber ausgenommen |
 
 Die Empfehlungen stammten jeweils vom KI-Assistenten, die Entscheidung von der Projektleitung.
 
@@ -37,9 +41,4 @@ Die Empfehlungen stammten jeweils vom KI-Assistenten, die Entscheidung von der P
 
 ## Offen für die Projektleitung
 
-| Nr. | Frage |
-|---|---|
-| O-1 | Testlänge: bei 20 bleiben und Einzelaussagen nur über das Gesamtergebnis (Empfehlung KI) oder 40 Aufgaben? |
-| O-2 | Punkte und Gewichte der Entscheidungsmatrix bestätigen |
-| O-3 | Lizenz für den Programmcode |
-| O-4 | Sollen die Dateifehler dem IQB gemeldet werden? |
+Fachliche Abnahme der Ergebnisse.

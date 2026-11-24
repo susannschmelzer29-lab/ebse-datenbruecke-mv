@@ -89,4 +89,5 @@ jede Vergleichsfreigabe entschieden. Recherche, Programmierung, Tests und Dokume
   [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Verändert: Auswahl, Umrechnung, Grafik. Die daraus
   abgeleiteten Tabellen und Grafiken stehen unter derselben Lizenz.
 - IQB-Bildungstrend 2021: keine Ergebniswerte im Repository, nur Befunde zur Dateiqualität.
-- Für den Programmcode wurde noch keine Lizenz vergeben.
+- **Programmcode:** [MIT-Lizenz](LICENSE). Sie gilt nicht für Inhalte der genannten Herausgeber und nicht für daraus
+  abgeleitete Zahlen, Tabellen und Grafiken (auch in `reports` und `dashboard`). Dafür gelten die Bedingungen der Quellen.
