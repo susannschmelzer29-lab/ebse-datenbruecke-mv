@@ -12,6 +12,10 @@
 - Für M-V weist der IQB-Bildungstrend 2021 keine Ergebnisse aus.
 - Aus einem PDF (Q4) werden nur zwei Zeilen gelesen. Ändert sich das Layout, bricht der Import bewusst ab.
 
+- **Nicht alle Schularten sind abgebildet.** Die Simulation enthält nur Regionale Schulen und Gesamtschulen. Förderschulen,
+  Waldorfschulen und Gymnasien fehlen. Aussagen über Kinder an Förderschulen sind damit auch im Modell nicht möglich.
+- Warum es in M-V Kinder in Klasse 5 und 6 am Gymnasium gibt (2025/26: 689 und 662), ist hier nicht geklärt.
+
 ## Datenqualität
 - Die Simulationsfehler und die Regeln stammen vom selben Team. Vollständige Erkennung ist erwartbar und kein Beleg für
   Wirksamkeit bei unbekannten Fehlern.
@@ -35,6 +39,11 @@
 - Gleiches Instrument zu zwei Zeitpunkten: Übungs- und Deckeneffekte sind nicht modelliert.
 - Fehlende Messungen sind in der Simulation zufällig. In der Praxis wäre das zu prüfen.
 - Gruppenunterschiede sind beschreibend, nie ursächlich.
+
+- **Sprache und Lesen:** Mathematikergebnisse hängen auch vom Textverständnis ab. Das ist nicht modelliert.
+- **Nachteilsausgleich und Förderbedarf** sind nicht abgebildet. Ein Ergebnis ohne diese Information kann ein Kind falsch
+  darstellen.
+- Je Leitidee erhält ein einzelnes Kind kein Band. Auch das Gesamtband darf nie allein eine Förderentscheidung begründen.
 
 ## Technik
 - Getestet unter Windows 11 mit Python 3.14, andere Systeme nicht.

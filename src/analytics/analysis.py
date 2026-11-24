@@ -8,7 +8,7 @@ import sqlite3
 import numpy as np
 import pandas as pd
 
-from src.config import BAENDER, BOOTSTRAP, LEITIDEEN, MIN_GRUPPE, SEED
+from src.config import BAENDER, BOOTSTRAP, LEITIDEEN, MIN_GRUPPE, SEED, band
 from src.transformation.compare import SIM_VERFAHREN, NichtVergleichbar, pruefe, vergleiche
 from src.transformation.simulate import PARAMETER
 
@@ -51,8 +51,18 @@ def kompetenzprofil(df) -> pd.DataFrame:
 
 
 def baender(df) -> pd.DataFrame:
+    """Bandverteilung je Leitidee, ausschließlich für Gruppen ab der Mindestgröße."""
+    df = df.assign(band=df.prozent.map(band))
+    df = df[df.groupby(["zeitpunkt_id", "kompetenz_id"]).band.transform("size") >= MIN_GRUPPE]
     t = df.groupby(["zeitpunkt_id", "kompetenz_id", "band"]).size().rename("n").reset_index()
     t["anteil"] = 100 * t.n / t.groupby(["zeitpunkt_id", "kompetenz_id"]).n.transform("sum")
+    return t
+
+
+def baender_gesamt(con) -> pd.DataFrame:
+    """Verteilung der Bänder über das Gesamtergebnis (nur vollständige Profile)."""
+    t = pd.read_sql("SELECT zeitpunkt_id, band, COUNT(*) AS n FROM v_sim_kind_gesamt GROUP BY 1, 2", con)
+    t["anteil"] = 100 * t.n / t.groupby("zeitpunkt_id").n.transform("sum")
     return t
 
 
@@ -165,6 +175,6 @@ def sperren_demo(con) -> list[tuple[str, str]]:
 
 def analysiere(con: sqlite3.Connection) -> dict:
     df = lade_sim(con)
-    return dict(profil=kompetenzprofil(df), baender=baender(df), veraenderung=veraenderung(con, df),
+    return dict(profil=kompetenzprofil(df), baender=baender(df), baender_gesamt=baender_gesamt(con), veraenderung=veraenderung(con, df),
                 gruppen=gruppen(con, df), sicherheit=einstufungssicherheit(df), iqb=iqb_mv(con),
                 iqb_trend=iqb_trend_mv(con), sperren=sperren_demo(con), sim=df)

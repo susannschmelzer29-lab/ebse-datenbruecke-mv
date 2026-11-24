@@ -37,9 +37,10 @@
 | kompetenz_id | Leitidee L1 bis L5 | L1 |
 | testdatum | fiktives Datum, JJJJ-MM-TT | 2025-09-15 |
 | punkte, max_punkte | gelöste und gestellte Aufgaben | 13; 20 |
-| band | Unterstützung prüfen (unter 50 %), im Aufbau (50 bis unter 75 %), sicher (ab 75 %) | im Aufbau |
 | roh_zeile | Zeile in SIM_ergebnisse_roh.csv | 2 |
 | ist_simuliert | immer 1 | 1 |
+
+`v_sim_kind_gesamt`: ein Band je Kind und Messzeitpunkt über alle fünf Leitideen, nur bei vollständigem Profil: Unterstützung prüfen (unter 50 %), im Aufbau (50 bis unter 75 %), sicher (ab 75 %). Je Leitidee wird für einzelne Kinder kein Band gespeichert.
 
 `sim_schule`: schule_id, name („Fiktive Schule …“), schulart, raumtyp. `sim_kind`: kind_id, schule_id, klasse_id.
 Nicht enthalten (Datenminimierung): Name, Geschlecht, Herkunft, Förderbedarf, Geburtsdatum.

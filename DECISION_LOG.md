@@ -21,6 +21,11 @@
 | PL-13 | 24.11.2026 | Punkte und Gewichte der Entscheidungsmatrix bestätigt | Vorschlag KI, siehe Machbarkeitsanalyse |
 | PL-14 | 24.11.2026 | Keine Meldung der Dateifehler an das IQB | Befunde bleiben im Datenqualitätsbericht dokumentiert |
 | PL-15 | 24.11.2026 | MIT-Lizenz für den Programmcode | Inhalte der Herausgeber ausgenommen |
+| PL-16 | 24.11.2026 | Grenze ergänzt: Simulation ohne Förder-, Waldorfschulen und Gymnasien; keine neuen Daten | fehlende Schularten offen benennen |
+| PL-17 | 24.11.2026 | Bandname „Unterstützung prüfen“ bleibt | fordert zum Hinsehen auf, ohne zu etikettieren |
+| PL-18 | 24.11.2026 | Gymnasium in Klasse 5/6 bleibt offene Frage | ohne Beleg keine Erklärung |
+| PL-19 | 24.11.2026 | Einzelne Kinder: kein Band je Leitidee, nur Gesamtergebnis, nie alleinige Grundlage für Förderung | Testlängenvergleich (KI-9) |
+| PL-20 | 24.11.2026 | Grenzen ergänzt: Sprache und Lesen, Nachteilsausgleich | fachliche Aussagekraft |
 
 Die Empfehlungen stammten jeweils vom KI-Assistenten, die Entscheidung von der Projektleitung.
 
@@ -38,6 +43,7 @@ Die Empfehlungen stammten jeweils vom KI-Assistenten, die Entscheidung von der P
 | KI-8 | Analyse der Einstufungssicherheit ergänzt | Bänder ohne Unsicherheit wären irreführend |
 | KI-9 | Testlänge 10 bis 100 Aufgaben verglichen (Auftrag PL: 40 Aufgaben testen), Hauptlauf unverändert bei 20 | Entscheidung vorbereiten |
 | KI-10 | Darstellung korrigiert: „Bereich berührt Bandgrenze“ (über 80 %) ist nicht „falsch eingestuft“ (rund 26 %) | erste Fassung war missverständlich |
+| KI-11 | Spalte `band` aus `fact_simulation` entfernt, Sicht `v_sim_kind_gesamt` ergänzt | Umsetzung PL-19 im Datenmodell |
 
 ## Offen für die Projektleitung
 

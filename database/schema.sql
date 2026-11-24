@@ -103,7 +103,6 @@ CREATE TABLE fact_simulation (
     testdatum     TEXT NOT NULL,
     punkte        INTEGER NOT NULL,
     max_punkte    INTEGER NOT NULL CHECK (max_punkte > 0),
-    band          TEXT NOT NULL,
     roh_zeile     INTEGER NOT NULL,
     ist_simuliert INTEGER NOT NULL DEFAULT 1 CHECK (ist_simuliert = 1),
     CHECK (punkte BETWEEN 0 AND max_punkte),
@@ -156,8 +155,22 @@ LEFT JOIN dim_kompetenz k USING (kompetenz_id);
 CREATE VIEW v_simulation AS
 SELECT s.sim_id, s.kind_id, k.klasse_id, k.schule_id, u.schulart, u.raumtyp, s.zeitpunkt_id,
        s.klassenstufe, s.kompetenz_id, d.bezeichnung AS leitidee, s.punkte, s.max_punkte,
-       100.0 * s.punkte / s.max_punkte AS prozent, s.band, s.ist_simuliert
+       100.0 * s.punkte / s.max_punkte AS prozent, s.ist_simuliert
 FROM fact_simulation s
 JOIN sim_kind k USING (kind_id)
 JOIN sim_schule u USING (schule_id)
 JOIN dim_kompetenz d USING (kompetenz_id);
+
+-- Einzelnes Kind: Band nur für das Gesamtergebnis und nur bei vollständigem Profil (Entscheidung PL-19).
+-- Je Leitidee wird bewusst kein Band für einzelne Kinder gespeichert.
+CREATE VIEW v_sim_kind_gesamt AS
+SELECT kind_id, klasse_id, schule_id, schulart, raumtyp, zeitpunkt_id, klassenstufe,
+       SUM(punkte) AS punkte, SUM(max_punkte) AS max_punkte,
+       100.0 * SUM(punkte) / SUM(max_punkte) AS prozent,
+       CASE WHEN 100.0 * SUM(punkte) / SUM(max_punkte) >= 75 THEN 'sicher'
+            WHEN 100.0 * SUM(punkte) / SUM(max_punkte) >= 50 THEN 'im Aufbau'
+            ELSE 'Unterstützung prüfen' END AS band,
+       1 AS ist_simuliert
+FROM v_simulation
+GROUP BY kind_id, klasse_id, schule_id, schulart, raumtyp, zeitpunkt_id, klassenstufe
+HAVING COUNT(DISTINCT kompetenz_id) = 5;

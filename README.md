@@ -72,7 +72,7 @@ Rohdaten (unverändert, SHA-256)           Simulation (fester Startwert)
 | `data/simulated` | simulierte Daten, Fehlerprotokoll, Parameter |
 | `database` | Schema und Beispielabfragen |
 | `src` | Programmcode |
-| `tests` | 36 automatisierte Tests |
+| `tests` | 37 automatisierte Tests |
 | `docs`, `reports`, `dashboard` | Dokumentation und Ergebnisse |
 
 ## Arbeitsweise

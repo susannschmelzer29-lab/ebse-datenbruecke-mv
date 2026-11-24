@@ -33,6 +33,15 @@ amtlichen Kompetenzstufen und keine Mindeststandards.
 
 ![Verteilung](grafiken/3_verteilung.png)
 
+| Band (Gesamtergebnis) | Beginn Kl. 5 % | Beginn Kl. 6 % |
+|---|---|---|
+| Unterstützung prüfen | 41,7 | 28,4 |
+| im Aufbau | 40,6 | 43,9 |
+| sicher | 17,7 | 27,8 |
+
+Bänder je Leitidee werden nur für Gruppen ausgewiesen. Für ein einzelnes Kind gibt es ausschließlich ein Band über das
+Gesamtergebnis, nie als alleinige Grundlage für Förderung (Entscheidung PL-19).
+
 ## 3. Veränderung zwischen zwei Messzeitpunkten
 
 ![Veränderung](grafiken/4_veraenderung.png)

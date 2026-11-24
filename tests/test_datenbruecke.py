@@ -167,7 +167,7 @@ def test_schema_verhindert_unmarkierte_simulation_und_negative_fehler():
     con.executescript(SCHEMA.read_text(encoding="utf-8"))
     con.execute("PRAGMA foreign_keys = OFF")
     with pytest.raises(sqlite3.IntegrityError):
-        con.execute("INSERT INTO fact_simulation VALUES (1,'V','SIM-K1','T1',5,'L1','2025-09-10',10,20,'im Aufbau',2,0)")
+        con.execute("INSERT INTO fact_simulation VALUES (1,'V','SIM-K1','T1',5,'L1','2025-09-10',10,20,2,0)")
     with pytest.raises(sqlite3.IntegrityError):
         con.execute("INSERT INTO sim_schule VALUES ('SIM-S99','Echte Schule','Regionale Schule','ländlich')")
     with pytest.raises(sqlite3.IntegrityError):
@@ -238,6 +238,16 @@ def test_kompetenzprofil_gegen_direktes_sql(lauf):
 def test_bandanteile_ergeben_100(lauf):
     b = analysis.baender(analysis.lade_sim(lauf["con"]))
     assert np.allclose(b.groupby(["zeitpunkt_id", "kompetenz_id"]).anteil.sum(), 100)
+
+
+@real
+def test_kein_einzelband_je_leitidee_gespeichert(lauf):
+    con = lauf["con"]
+    for t in ("fact_simulation", "v_simulation"):
+        assert "band" not in [z[1] for z in con.execute(f"PRAGMA table_info({t})")]
+    zeilen = con.execute("SELECT prozent, band, max_punkte FROM v_sim_kind_gesamt").fetchall()
+    assert len(zeilen) > 1000
+    assert all(b == band(p) and m == 100 for p, b, m in zeilen)  # SQL-Grenzen gleich config.BAENDER
 
 
 @real

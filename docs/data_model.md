@@ -20,7 +20,7 @@ erDiagram
     dim_datenquelle ||--o{ dq_befund : betrifft
 ```
 
-## Fünf Entwurfsentscheidungen
+## Sechs Entwurfsentscheidungen
 
 1. **Zwei getrennte Faktentabellen.** `fact_aggregat` (real) und `fact_simulation` (künstlich) haben keine gemeinsame Sicht.
    Das Schema lehnt simulierte Zeilen ohne Kennzeichnung ab.
@@ -30,6 +30,9 @@ erDiagram
 4. **Fehlend ist nicht null.** Nicht ausgewiesene Werte stehen mit Status und Grund in der Tabelle.
 5. **Schulformen nur für M-V zugeordnet.** Die Zuordnung der Destatis-Gruppen ist durch den zahlengenauen Abgleich mit dem
    Statistischen Amt gestützt. Für andere Länder gilt sie nicht.
+
+6. **Kein Einzelband je Leitidee.** Bänder je Leitidee entstehen erst in der Gruppenauswertung. Für ein einzelnes Kind gibt es
+   nur das Gesamtergebnis (`v_sim_kind_gesamt`).
 
 ## Vergleichbarkeit als Sperre
 

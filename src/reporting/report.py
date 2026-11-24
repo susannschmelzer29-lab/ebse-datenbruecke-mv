@@ -4,7 +4,7 @@ import html
 
 import pandas as pd
 
-from src.config import DASHBOARD, QUELLEN, REPORTS
+from src.config import BAENDER, DASHBOARD, QUELLEN, REPORTS
 from src.reporting.charts import ORDNER
 from src.transformation.simulate import PARAMETER
 
@@ -87,6 +87,12 @@ def tab_profil(r):
     return pd.DataFrame({"Messung": t.zeitpunkt.map({"T1": "Beginn Kl. 5", "T2": "Beginn Kl. 6"}),
                          "Leitidee": t.leitidee + " " + t.bezeichnung, "n": t.n, "Mittel %": t.mittel,
                          "95-%-Intervall": [f"{_z(u)} bis {_z(o)}" for u, o in zip(t.ki_u, t.ki_o)], "SD": t.sd})
+
+
+def tab_baender_gesamt(r):
+    t = r["baender_gesamt"].pivot(index="band", columns="zeitpunkt_id", values="anteil")
+    t = t.reindex([b for _, b in BAENDER]).reset_index()
+    return pd.DataFrame({"Band (Gesamtergebnis)": t.band, "Beginn Kl. 5 %": t.T1, "Beginn Kl. 6 %": t.T2})
 
 
 def tab_veraenderung(r):
@@ -210,6 +216,10 @@ amtlichen Kompetenzstufen und keine Mindeststandards.
 
 ![Verteilung](grafiken/3_verteilung.png)
 
+{md(tab_baender_gesamt(r))}
+Bänder je Leitidee werden nur für Gruppen ausgewiesen. Für ein einzelnes Kind gibt es ausschließlich ein Band über das
+Gesamtergebnis, nie als alleinige Grundlage für Förderung (Entscheidung PL-19).
+
 ## 3. Veränderung zwischen zwei Messzeitpunkten
 
 ![Veränderung](grafiken/4_veraenderung.png)
@@ -313,7 +323,8 @@ arbeiten, nicht, dass unbekannte Fehler gefunden würden.</p>
 weist das IQB für Mecklenburg-Vorpommern keine Ergebnisse aus. Ein Verlauf von Klasse 4 bis 9 ist nicht ableitbar.</p>
 <h2 id="sim">4. Exemplarisches Kompetenzmonitoring</h2>{sim}
 {bild("1_kompetenzprofil")}{klapp("Werte", tabelle(tab_profil(r)))}
-{bild("2_baender")}{bild("3_verteilung")}
+{bild("2_baender")}{bild("3_verteilung")}{klapp("Bänder über das Gesamtergebnis", tabelle(tab_baender_gesamt(r)))}
+<p>Bänder je Leitidee gelten nur für Gruppen. Für einzelne Kinder gibt es nur ein Band über das Gesamtergebnis, nie als alleinige Grundlage für Förderung.</p>
 {bild("4_veraenderung")}{klapp("Werte", tabelle(tab_veraenderung(r)))}
 {bild("5_gruppen")}{klapp("Werte", tabelle(tab_gruppen(r)))}
 {bild("6_einstufungssicherheit")}

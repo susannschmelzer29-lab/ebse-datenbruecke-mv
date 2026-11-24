@@ -3,7 +3,7 @@ import sqlite3
 
 import pandas as pd
 
-from src.config import DB, LEITIDEEN, PROCESSED, QUELLEN, SCHEMA, SIMULATED, band
+from src.config import DB, LEITIDEEN, PROCESSED, QUELLEN, SCHEMA, SIMULATED
 from src.ingestion.parse_real import q3_hinweis_mv
 from src.quality.checks import REGELN as DQ_REGELN
 from src.transformation import normalize
@@ -86,9 +86,9 @@ def baue(real: pd.DataFrame, sim: pd.DataFrame, befunde: list[dict], manifest: d
     con.executemany("INSERT INTO sim_kind VALUES (?,?,?)", kinder.itertuples(index=False, name=None))
     con.executemany(
         "INSERT INTO fact_simulation (verfahren_id, kind_id, zeitpunkt_id, klassenstufe, kompetenz_id, testdatum, "
-        "punkte, max_punkte, band, roh_zeile) VALUES ('V_SIM_MATHE_OS',?,?,?,?,?,?,?,?,?)",
+        "punkte, max_punkte, roh_zeile) VALUES ('V_SIM_MATHE_OS',?,?,?,?,?,?,?,?)",
         [(z.kind_id, z.zeitpunkt_id, z.klassenstufe, z.kompetenz_id, z.testdatum, z.punkte, z.max_punkte,
-          band(100 * z.punkte / z.max_punkte), z.roh_zeile) for z in sim.itertuples()])
+          z.roh_zeile) for z in sim.itertuples()])
     con.executemany(
         "INSERT INTO dq_befund (regel_id, quelle_id, fundstelle, feld, rohwert, meldung, behandlung) "
         "VALUES (:regel_id,:quelle_id,:fundstelle,:feld,:rohwert,:meldung,:behandlung)", befunde)
