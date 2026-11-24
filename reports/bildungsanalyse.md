@@ -127,6 +127,20 @@ keine Förderentscheidung begründen.
 | M-V | 2024-2012 | -34,0 | 4,4 |
 | M-V | 2024-2018 | -11,0 | 4,5 |
 
+### Nach Kompetenzbereich
+
+![Kompetenzbereiche](grafiken/8_iqb_bereiche.png)
+
+| Kompetenzbereich | M-V 2024 | Deutschland 2024 | Abstand | M-V zu Deutschland 2012 / 2018 / 2024 (– = nicht signifikant) | Veränderung M-V 2012–2024 (SE) | Veränderung signifikant | Veränderung Deutschland | MSA-Mindeststandard verfehlt M-V / D % |
+|---|---|---|---|---|---|---|---|---|
+| Messen | 453 | 468 | -15 | darunter / darunter / darunter | -32 (5,3) | ja | -32 | 41,0 / 35,0 |
+| Raum und Form | 467 | 472 | -5 | – / darunter / – | -38 (5,8) | ja | -28 | 35,1 / 33,8 |
+| Zahl | 471 | 472 | -1 | darüber / darunter / – | -41 (5,2) | ja | -28 | 32,7 / 33,8 |
+| Daten und Zufall | 481 | 479 | +2 | darüber / darunter / – | -28 (5,3) | ja | -21 | 28,5 / 32,0 |
+| Funktionaler Zusammenhang | 478 | 475 | +4 | darüber / darunter / – | -38 (4,7) | ja | -25 | 30,5 / 34,3 |
+
+2024 liegt M-V nur in „Messen“ laut IQB signifikant unter Deutschland, dort auch schon 2012 und 2018. Der Wert sank dort in beiden Räumen seit 2012 um 32 Punkte, der Rückstand blieb also etwa gleich. In allen fünf Bereichen sind die Werte in M-V seit 2012 laut IQB signifikant gesunken. Ursachen lassen sich daraus nicht ableiten. Ob das IQB für mehrere Vergleiche korrigiert, wurde nicht geprüft. Für „Größen und Messen“ in Klasse 5/6 folgt daraus kein Befund, sondern eine Frage: Zeigt sich eine Schwäche schon in der Lernausgangslage? Abstände sind aus ungerundeten Werten berechnet, soweit die Quelle sie enthält.
+
 Quelle: IQB-Bildungstrend 2024, Zusatzmaterial Tabellen, Stand 25.06.2026, CC BY-NC-SA 4.0, eigene Auswahl und
 Darstellung. Veränderungen und ihre Standardfehler sind übernommen, weil sie nicht allein aus den Einzelwerten
 berechenbar sind. Die Werte betreffen Klasse 9 und sind mit Klasse 5/6 nicht vergleichbar.

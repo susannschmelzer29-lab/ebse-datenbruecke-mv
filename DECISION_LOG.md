@@ -26,6 +26,7 @@
 | PL-18 | 24.11.2026 | Gymnasium in Klasse 5/6 bleibt offene Frage | ohne Beleg keine Erklärung |
 | PL-19 | 24.11.2026 | Einzelne Kinder: kein Band je Leitidee, nur Gesamtergebnis, nie alleinige Grundlage für Förderung | Testlängenvergleich (KI-9) |
 | PL-20 | 24.11.2026 | Grenzen ergänzt: Sprache und Lesen, Nachteilsausgleich | fachliche Aussagekraft |
+| PL-21 | 24.11.2026 | Auswertung Klasse 9 nach Kompetenzbereich in den Bericht aufgenommen | gedeckt durch F2 bis F5; Frage statt Ursache |
 
 Die Empfehlungen stammten jeweils vom KI-Assistenten, die Entscheidung von der Projektleitung.
 
@@ -44,6 +45,7 @@ Die Empfehlungen stammten jeweils vom KI-Assistenten, die Entscheidung von der P
 | KI-9 | Testlänge 10 bis 100 Aufgaben verglichen (Auftrag PL: 40 Aufgaben testen), Hauptlauf unverändert bei 20 | Entscheidung vorbereiten |
 | KI-10 | Darstellung korrigiert: „Bereich berührt Bandgrenze“ (über 80 %) ist nicht „falsch eingestuft“ (rund 26 %) | erste Fassung war missverständlich |
 | KI-11 | Spalte `band` aus `fact_simulation` entfernt, Sicht `v_sim_kind_gesamt` ergänzt | Umsetzung PL-19 im Datenmodell |
+| KI-12 | Signifikanzangaben aus der Quelle eingelesen (Markierung und Fettdruck, Legende wird geprüft) | nicht selbst berechnen |
 
 ## Offen für die Projektleitung
 

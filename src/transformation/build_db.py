@@ -68,17 +68,18 @@ def baue(real: pd.DataFrame, sim: pd.DataFrame, befunde: list[dict], manifest: d
         zeilen.append((z.quelle_id, z.verfahren_id, normalize.LAND_ID[normalize.land(z.land_roh)], int(z.klassenstufe),
                        sf.get((z.quelle_id, z.schulart_roh)), komp.get((z.quelle_id, z.kompetenz_roh)),
                        z.zeitpunkt, z.kennzahl, wert, se, status, grund, z.wert_roh,
-                       z.se_roh if isinstance(z.se_roh, str) else None, z.land_roh, z.blatt, z.zelle))
+                       z.se_roh if isinstance(z.se_roh, str) else None, z.land_roh, z.blatt, z.zelle,
+                       None if pd.isna(z.sig_de) else int(z.sig_de), None if pd.isna(z.sig_zeit) else int(z.sig_zeit)))
     ort, hinweis = q3_hinweis_mv()
     for (q, _), kid in komp.items():
         if q == "Q3":
             for kz in ("mittelwert", "ms_verfehlt"):
                 zeilen.append(("Q3", "V_IQB21_KL4", "MV", 4, None, kid, "2021", kz, None, None, "nicht_ausgewiesen",
-                               hinweis, None, None, None, "Inhalt", ort))
+                               hinweis, None, None, None, "Inhalt", ort, None, None))
     con.executemany(
         "INSERT INTO fact_aggregat (quelle_id, verfahren_id, land_id, klassenstufe, schulform_id, kompetenz_id, "
-        "zeitpunkt_id, kennzahl, wert, se, status, statusgrund, wert_roh, se_roh, land_roh, blatt, zelle) "
-        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", zeilen)
+        "zeitpunkt_id, kennzahl, wert, se, status, statusgrund, wert_roh, se_roh, land_roh, blatt, zelle, sig_de, sig_zeit) "
+        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", zeilen)
 
     schulen = pd.read_csv(SIMULATED / "SIM_schulen.csv")
     con.executemany("INSERT INTO sim_schule VALUES (?,?,?,?)", schulen.itertuples(index=False, name=None))

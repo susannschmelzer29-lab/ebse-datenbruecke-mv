@@ -164,6 +164,24 @@ def iqb(t):
             "Eigene Darstellung nach IQB-Bildungstrend 2024, Zusatztabelle 4.1web, CC BY-NC-SA 4.0, verändert. Balken: ±1,96 SE.")
 
 
+def iqb_bereiche(t):
+    fig, ax = plt.subplots(figsize=(8.6, 4.2))
+    y = np.arange(len(t))[::-1]
+    for sp, f, off, name in (("de", BLAU, 0.13, "Deutschland"), ("mv", ORANGE, -0.13, "Mecklenburg-Vorpommern")):
+        ax.errorbar(t[f"{sp}_2024"], y + off, xerr=1.96 * t[f"{sp}_se_2024"], fmt="o", ms=8, color=f, lw=2, mec=FL,
+                    mew=1.5, label=name)
+        for yy, v, s in zip(y + off, t[f"{sp}_2024"], t[f"{sp}_se_2024"]):
+            ax.text(v + 1.96 * s + 0.6, yy, f"{v:.0f}", va="center", fontsize=9, color=TXT2)
+    ax.set_yticks(y, [f"{b}{' *' if s else ''}" for b, s in zip(t.bezeichnung, t.sig_2024)])
+    ax.set_xlim(440, 500)
+    ax.set_ylim(-0.6, len(t) - 0.4)
+    ax.grid(axis="y", visible=False)
+    ax.set_xlabel("IQB-Berichtsskala 2024 (Achse beginnt bei 440), Balken: ±1,96 SE")
+    ax.legend(frameon=False, loc="upper right")
+    _fertig(fig, "8_iqb_bereiche", "Reale Aggregate: Klasse 9 nach Kompetenzbereich, 2024",
+            "* laut IQB signifikant verschieden (p < .05). Nach IQB-Bildungstrend 2024, Tab. 4.2web bis 4.6web, CC BY-NC-SA 4.0, verändert.")
+
+
 def alle(r):
     profil(r["profil"])
     baender(r["baender"])
@@ -172,3 +190,4 @@ def alle(r):
     gruppen(r["gruppen"])
     sicherheit(r["sicherheit"])
     iqb(r["iqb"])
+    iqb_bereiche(r["iqb_bereiche"])

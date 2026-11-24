@@ -83,6 +83,20 @@ def test_stichproben_gegen_originalzellen(lauf):
 
 
 @real
+def test_signifikanz_und_bereiche_gegen_originaldatei(lauf):
+    """Markierungen und Werte von Hand in Tab. 4.2web bis 4.6web abgelesen."""
+    t = analysis.iqb_bereiche(lauf["con"]).set_index("bezeichnung")
+    assert t.index[0] == "Messen" and list(t.index[t.sig_2024]) == ["Messen"]
+    assert t.loc["Messen", ["mv_2024", "de_2024", "veraenderung_mv"]].tolist() == [453, 468, -32]
+    assert t.loc["Messen", ["sig_2012", "sig_2018", "sig_2024"]].all()
+    assert t.loc["Raum und Form", ["sig_2012", "sig_2018", "sig_2024"]].tolist() == [False, True, False]
+    assert t.loc["Messen", "ms_mv_2024"] == 41.0 and t.veraenderung_mv_sig.all()
+    # nicht fett gedruckt in der Quelle: Veränderung 2018 bis 2024 im Bereich Zahl
+    f = fakt(lauf["con"], verfahren_id="V_IQB24_KL9_ALLE", land_id="MV", kompetenz_id="SEK1-1", zeitpunkt_id="2024-2018", kennzahl="differenz_mittelwert")
+    assert lauf["con"].execute("SELECT wert, sig_zeit FROM fact_aggregat WHERE fakt_id = ?", (f,)).fetchone() == (-8.0, 0)
+
+
+@real
 def test_jeder_reale_wert_hat_fundstelle(lauf):
     n, ohne = lauf["con"].execute("SELECT COUNT(*), SUM(blatt = '' OR zelle = '' OR sha256 IS NULL) FROM v_lineage").fetchone()
     assert n > 3900 and ohne == 0
@@ -171,7 +185,7 @@ def test_schema_verhindert_unmarkierte_simulation_und_negative_fehler():
     with pytest.raises(sqlite3.IntegrityError):
         con.execute("INSERT INTO sim_schule VALUES ('SIM-S99','Echte Schule','Regionale Schule','ländlich')")
     with pytest.raises(sqlite3.IntegrityError):
-        con.execute("INSERT INTO fact_aggregat VALUES (1,'Q','V','MV',9,NULL,NULL,'2024','x',1,-1,'gueltig',NULL,'1','-1','MV','b','z')")
+        con.execute("INSERT INTO fact_aggregat VALUES (1,'Q','V','MV',9,NULL,NULL,'2024','x',1,-1,'gueltig',NULL,'1','-1','MV','b','z',NULL,NULL)")
 
 
 @real

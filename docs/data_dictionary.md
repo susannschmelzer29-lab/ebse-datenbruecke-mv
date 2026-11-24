@@ -17,6 +17,8 @@
 | statusgrund | Begründung bei Abweichung | Negativer Standardfehler in der Quelle |
 | wert_roh, se_roh, land_roh | unveränderter Originaltext | Mecklenburg-Vormpommern |
 | blatt, zelle | Fundstelle in der Originaldatei | Tab. 4.1web, P14 |
+| sig_de | laut IQB signifikant verschieden von Deutschland (Markierung „a“), nur Q2-Mittelwerte und Differenzen | 1 |
+| sig_zeit | laut IQB signifikante Veränderung (Fettdruck), nur Q2-Differenzen | 1 |
 
 **Kennzahlen**
 | Kennzahl | Bedeutung | Einheit |

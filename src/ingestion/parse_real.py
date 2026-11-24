@@ -15,7 +15,7 @@ from pypdf import PdfReader
 from src.config import QUELLEN, RAW
 
 SPALTEN = ["quelle_id", "verfahren_id", "blatt", "zelle", "land_roh", "klassenstufe", "schulart_roh",
-           "kompetenz_roh", "zeitpunkt", "kennzahl", "wert_roh", "se_roh", "se_zelle"]
+           "kompetenz_roh", "zeitpunkt", "kennzahl", "wert_roh", "se_roh", "se_zelle", "sig_de", "sig_zeit"]
 
 
 class VertragFehler(RuntimeError):
@@ -72,13 +72,19 @@ def parse_q1() -> list[dict]:
     return out
 
 
-def _trend_mittelwerte(ws, qid, verf, klasse, kompetenz, jahre, diffs):
+def _trend_mittelwerte(ws, qid, verf, klasse, kompetenz, jahre, diffs, signifikanz=False):
     """Tabellen 'Mittelwerte und Streuungen im Trend': feste 7-Spalten-Blöcke je Jahr.
 
     Differenzen werden samt Standardfehler aus der Quelle übernommen und nicht selbst berechnet,
     weil die veröffentlichten Fehler auch die Verknüpfung der Messzeitpunkte berücksichtigen.
     """
-    out, rows = [], list(ws.iter_rows(values_only=True))
+    zellen = list(ws.iter_rows())
+    out, rows = [], [[c.value for c in z] for z in zellen]
+    if signifikanz:  # Bedeutung der Markierungen muss in der Legende stehen
+        legende = " ".join(str(z[0]) for z in rows if z and z[0])
+        for text in ("a Wert unterscheidet sich statistisch signifikant (p < .05) vom entsprechenden Wert in Deutschland",
+                     "Fett gedruckte Differenzen sind statistisch signifikant (p < .05)"):
+            _erwarte(text in legende, True, f"{qid}/{ws.title} Legende")
     for k, jahr in enumerate(jahre):
         _erwarte(rows[4][1 + 7 * k], jahr, f"{qid}/{ws.title} Zeile 5")
         for off, soll in ((0, "M"), (2, "SE"), (3, "SD"), (5, "SE")):
@@ -93,7 +99,13 @@ def _trend_mittelwerte(ws, qid, verf, klasse, kompetenz, jahre, diffs):
                         zelle=f"{get_column_letter(c + 1)}{nr}", land_roh=z[0], klassenstufe=klasse,
                         schulart_roh=None, kompetenz_roh=kompetenz, zeitpunkt=zp, kennzahl=kz,
                         wert_roh=_text(z[c]), se_roh=_text(z[sc]),
-                        se_zelle=f"{get_column_letter(sc + 1)}{nr}"))
+                        se_zelle=f"{get_column_letter(sc + 1)}{nr}",
+                        sig_de=None, sig_zeit=None))
+        # Markierung „a“ rechts neben dem Wert; Fettdruck nur bei Differenzen. Deutschland ist der Bezugswert.
+        if signifikanz and kz != "standardabweichung" and z[0] != "Deutschland":
+            out[-1]["sig_de"] = int(z[c + 1] == "a")
+        if signifikanz and kz == "differenz_mittelwert":
+            out[-1]["sig_zeit"] = int(bool(zellen[nr - 1][c].font.b))
 
     for nr, z in enumerate(rows[6:], start=7):
         if not z[0] or not isinstance(z[1], (int, float)):
@@ -134,7 +146,8 @@ def parse_q2() -> list[dict]:
     komp = ["Globalskala", "Zahl", "Messen", "Raum und Form", "Funktionaler Zusammenhang", "Daten und Zufall"]
     diffs = ["Differenz 2018–2012", "Differenz 2024–2018", "Differenz 2024–2012"]
     for i, k in enumerate(komp):
-        out += _trend_mittelwerte(wb[f"Tab. 4.{1 + i}web"], "Q2", "V_IQB24_KL9_ALLE", 9, k, jahre, diffs)
+        out += _trend_mittelwerte(wb[f"Tab. 4.{1 + i}web"], "Q2", "V_IQB24_KL9_ALLE", 9, k, jahre, diffs,
+                                  signifikanz=True)
         out += _standards(wb[f"Tab. 3.{25 + i}web"], "Q2", "V_IQB24_KL9_ZIELGLEICH", 9, k, jahre,
                           {"MS (ESA) verfehlt": "ms_esa_verfehlt", "MS (MSA) verfehlt": "ms_msa_verfehlt"})
     return out

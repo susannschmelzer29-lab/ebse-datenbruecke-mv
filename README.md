@@ -18,6 +18,7 @@ Kompetenzentwicklungen transparent und reproduzierbar auswertbar sind?
 | Sind veröffentlichte Tabellen fehlerfrei? | Nein. Gefunden: abweichende Landesnamen, acht negative Standardfehler, eine fehlende Teilzeile |
 | Bedeutet gleicher Name gleicher Inhalt? | Nein. „Schülerzahl Klasse 5“: 15.248 oder 14.539, je nach Tabelle |
 | Gibt es öffentliche Kompetenzdaten für Klasse 5/6? | Keine gefunden. Für Klasse 4 (2021) weist das IQB für M-V keine Ergebnisse aus |
+| Was zeigen reale Daten für M-V? | Klasse 9, 2024: Nur im Bereich „Messen“ liegt M-V laut IQB signifikant unter Deutschland. Ursachen und Aussagen zu Klasse 5/6 sind nicht ableitbar |
 | Dürfen alle Werte verglichen werden? | Nein. Ohne begründete Freigabe weist das System jeden Vergleich ab |
 | Taugt ein Kurztest zur Einzeleinstufung? | In der Simulation nur begrenzt: Mit 20 Aufgaben je Leitidee wäre rund jedes vierte Band falsch, mit 40 Aufgaben knapp jedes fünfte |
 
@@ -72,7 +73,7 @@ Rohdaten (unverändert, SHA-256)           Simulation (fester Startwert)
 | `data/simulated` | simulierte Daten, Fehlerprotokoll, Parameter |
 | `database` | Schema und Beispielabfragen |
 | `src` | Programmcode |
-| `tests` | 37 automatisierte Tests |
+| `tests` | 38 automatisierte Tests |
 | `docs`, `reports`, `dashboard` | Dokumentation und Ergebnisse |
 
 ## Arbeitsweise

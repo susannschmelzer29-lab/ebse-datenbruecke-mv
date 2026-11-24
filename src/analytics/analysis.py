@@ -155,6 +155,34 @@ def iqb_trend_mv(con) -> pd.DataFrame:
                        "AND kompetenz_id='SEK1-0' AND land_id IN ('MV','DE') ORDER BY land_id, zeitpunkt_id", con)
 
 
+def iqb_bereiche(con) -> pd.DataFrame:
+    """M-V und Deutschland je Kompetenzbereich, Klasse 9. Signifikanz und Veränderung stammen vom IQB."""
+    werte = iqb_mv(con)
+    werte = werte[werte.kompetenz_id != "SEK1-0"]
+    m = werte[werte.kennzahl == "mittelwert"]
+    ms = werte[werte.kennzahl == "ms_msa_verfehlt"].set_index(["kompetenz_id", "jahr"])
+    pruefe(con, "V_IQB24_KL9_ALLE", "V_IQB24_KL9_ALLE", "mittelwert", "zeit")
+    q = pd.read_sql("SELECT kompetenz_id, land_id, zeitpunkt_id, kennzahl, wert, se, sig_de, sig_zeit FROM fact_aggregat "
+                    "WHERE verfahren_id = 'V_IQB24_KL9_ALLE' AND land_id IN ('MV', 'DE') "
+                    "AND kennzahl IN ('mittelwert', 'differenz_mittelwert')", con)
+    q = q.set_index(["kompetenz_id", "land_id", "zeitpunkt_id", "kennzahl"])
+    out = []
+    for (kid, bez), g in m.groupby(["kompetenz_id", "bezeichnung"]):
+        g = g.set_index("jahr")
+        z = dict(kompetenz_id=kid, bezeichnung=bez)
+        for jahr in (2012, 2018, 2024):
+            z |= {f"mv_{jahr}": g.mv[jahr], f"mv_se_{jahr}": g.mv_se[jahr], f"de_{jahr}": g.de[jahr],
+                  f"de_se_{jahr}": g.de_se[jahr],
+                  f"sig_{jahr}": bool(q.sig_de[(kid, "MV", str(jahr), "mittelwert")])}
+        d = (kid, "MV", "2024-2012", "differenz_mittelwert")
+        z |= dict(abstand_2024=z["mv_2024"] - z["de_2024"], veraenderung_mv=q.wert[d], veraenderung_mv_se=q.se[d],
+                  veraenderung_mv_sig=bool(q.sig_zeit[d]),
+                  veraenderung_de=q.wert[(kid, "DE", "2024-2012", "differenz_mittelwert")],
+                  ms_mv_2024=ms.mv[(kid, 2024)], ms_de_2024=ms.de[(kid, 2024)])
+        out.append(z)
+    return pd.DataFrame(out).sort_values("abstand_2024").reset_index(drop=True)
+
+
 def sperren_demo(con) -> list[tuple[str, str]]:
     """Versucht bewusst unzulässige Vergleiche und hält die Begründungen fest."""
     faelle = [("IQB Klasse 4 gegen IQB Klasse 9", "V_IQB21_KL4", "V_IQB24_KL9_ALLE", "mittelwert", "quelle"),
@@ -177,4 +205,4 @@ def analysiere(con: sqlite3.Connection) -> dict:
     df = lade_sim(con)
     return dict(profil=kompetenzprofil(df), baender=baender(df), baender_gesamt=baender_gesamt(con), veraenderung=veraenderung(con, df),
                 gruppen=gruppen(con, df), sicherheit=einstufungssicherheit(df), iqb=iqb_mv(con),
-                iqb_trend=iqb_trend_mv(con), sperren=sperren_demo(con), sim=df)
+                iqb_trend=iqb_trend_mv(con), iqb_bereiche=iqb_bereiche(con), sperren=sperren_demo(con), sim=df)

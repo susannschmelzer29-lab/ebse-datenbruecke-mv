@@ -24,6 +24,9 @@
 - „Gymnasium in Klasse 5/6“ bleibt Warnung: Die Zahlen sind in zwei amtlichen Quellen belegt, die Ausnahme ist fachlich zu klären.
 - Die Befunde betreffen Tabellendateien. Sie sagen nichts über die wissenschaftliche Qualität der Studien.
 
+- Signifikanzangaben zu Klasse 9 sind vom IQB übernommen, nicht selbst berechnet. Ob dort für mehrere Vergleiche korrigiert
+  wurde, ist hier nicht geprüft. „Messen“ in Klasse 9 erlaubt keinen Schluss auf „Größen und Messen“ in Klasse 5/6.
+
 ## Methode
 - Die drei Bänder sind **keine** amtlichen Kompetenzstufen und keine Mindeststandards.
 - **20 Aufgaben je Leitidee reichen für sichere Einzeleinstufungen nicht.** Rund 26 Prozent der Bänder wären falsch, meist um

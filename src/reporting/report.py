@@ -12,7 +12,8 @@ LEGENDE = {
     "1_kompetenzprofil": "Kompetenzprofil", "2_baender": "Verteilung auf Bänder",
     "3_verteilung": "Häufigkeitsverteilung", "4_veraenderung": "Veränderung zwischen den Messzeitpunkten",
     "5_gruppen": "Gruppenvergleiche", "6_einstufungssicherheit": "Sicherheit der Einzeleinstufung",
-    "7_iqb_klasse9": "Reale Aggregate Klasse 9"}
+    "7_iqb_klasse9": "Reale Aggregate Klasse 9",
+    "8_iqb_bereiche": "Reale Aggregate Klasse 9 nach Kompetenzbereich"}
 
 
 def _z(v, n=1):
@@ -120,6 +121,28 @@ def tab_iqb(r):
                          "M-V (SE)": [f"{_z(a)} ({_z(b)})" for a, b in zip(t.mv, t.mv_se)],
                          "Deutschland (SE)": [f"{_z(a)} ({_z(b)})" for a, b in zip(t.de, t.de_se)],
                          "Regel": t.regel, "Fundstelle M-V": t.fundstelle_mv})
+
+
+def tab_bereiche(r):
+    t, ja = r["iqb_bereiche"], lambda s: "ja" if s else "nein"
+
+    def lage(z, jahr):  # Richtung mitnennen: signifikant kann auch "besser" heißen
+        if not z[f"sig_{jahr}"]:
+            return "–"
+        return "darüber" if z[f"mv_{jahr}"] > z[f"de_{jahr}"] else "darunter"
+
+    return pd.DataFrame({"Kompetenzbereich": t.bezeichnung, "M-V 2024": [_z(x, 0) for x in t.mv_2024],
+                         "Deutschland 2024": [_z(x, 0) for x in t.de_2024],
+                         "Abstand": [f"{x:+.0f}" for x in t.abstand_2024],
+                         "M-V zu Deutschland 2012 / 2018 / 2024 (– = nicht signifikant)": [" / ".join(lage(z, j) for j in (2012, 2018, 2024))
+                                                                for _, z in t.iterrows()],
+                         "Veränderung M-V 2012–2024 (SE)": [f"{a:+.0f} ({_z(b)})" for a, b in zip(t.veraenderung_mv, t.veraenderung_mv_se)],
+                         "Veränderung signifikant": [ja(x) for x in t.veraenderung_mv_sig],
+                         "Veränderung Deutschland": [f"{x:+.0f}" for x in t.veraenderung_de],
+                         "MSA-Mindeststandard verfehlt M-V / D %": [f"{_z(a)} / {_z(b)}" for a, b in zip(t.ms_mv_2024, t.ms_de_2024)]})
+
+
+TEXT_BEREICHE = ("2024 liegt M-V nur in „Messen“ laut IQB signifikant unter Deutschland, dort auch schon 2012 und 2018. Der Wert sank dort in beiden Räumen seit 2012 um 32 Punkte, der Rückstand blieb also etwa gleich. In allen fünf Bereichen sind die Werte in M-V seit 2012 laut IQB signifikant gesunken. Ursachen lassen sich daraus nicht ableiten. Ob das IQB für mehrere Vergleiche korrigiert, wurde nicht geprüft. Für „Größen und Messen“ in Klasse 5/6 folgt daraus kein Befund, sondern eine Frage: Zeigt sich eine Schwäche schon in der Lernausgangslage?")
 
 
 def tab_trend(r):
@@ -264,6 +287,13 @@ keine Förderentscheidung begründen.
 
 {md(tab_iqb(r))}
 {md(tab_trend(r))}
+### Nach Kompetenzbereich
+
+![Kompetenzbereiche](grafiken/8_iqb_bereiche.png)
+
+{md(tab_bereiche(r))}
+{TEXT_BEREICHE} Abstände sind aus ungerundeten Werten berechnet, soweit die Quelle sie enthält.
+
 Quelle: IQB-Bildungstrend 2024, Zusatzmaterial Tabellen, Stand 25.06.2026, CC BY-NC-SA 4.0, eigene Auswahl und
 Darstellung. Veränderungen und ihre Standardfehler sind übernommen, weil sie nicht allein aus den Einzelwerten
 berechenbar sind. Die Werte betreffen Klasse 9 und sind mit Klasse 5/6 nicht vergleichbar.
@@ -319,6 +349,8 @@ arbeiten, nicht, dass unbekannte Fehler gefunden würden.</p>
 <ul>{sperren}</ul>{klapp("Alle Vergleichsregeln", tabelle(tab_vergleich(con)))}
 <h2 id="real">3. Reale Aggregate: Mathematik Klasse 9</h2>{real}{bild("7_iqb_klasse9")}
 {klapp("Werte und Fundstellen", tabelle(tab_iqb(r)) + tabelle(tab_trend(r)))}
+<h3>Nach Kompetenzbereich</h3>{bild("8_iqb_bereiche")}<p>{TEXT_BEREICHE}</p>
+{klapp("Werte je Kompetenzbereich", tabelle(tab_bereiche(r)))}
 <p>Quelle: IQB-Bildungstrend 2024, Zusatzmaterial Tabellen, CC BY-NC-SA 4.0, eigene Auswahl und Darstellung. Für Klasse 4 (2021)
 weist das IQB für Mecklenburg-Vorpommern keine Ergebnisse aus. Ein Verlauf von Klasse 4 bis 9 ist nicht ableitbar.</p>
 <h2 id="sim">4. Exemplarisches Kompetenzmonitoring</h2>{sim}

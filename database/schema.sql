@@ -74,6 +74,8 @@ CREATE TABLE fact_aggregat (
     land_roh     TEXT,
     blatt        TEXT NOT NULL,
     zelle        TEXT NOT NULL,
+    sig_de       INTEGER CHECK (sig_de IN (0, 1)),    -- laut Quelle signifikant verschieden von Deutschland
+    sig_zeit     INTEGER CHECK (sig_zeit IN (0, 1)),  -- laut Quelle signifikante Veränderung
     CHECK ((status = 'nicht_ausgewiesen') = (wert IS NULL))
 );
 CREATE UNIQUE INDEX ux_aggregat ON fact_aggregat (
