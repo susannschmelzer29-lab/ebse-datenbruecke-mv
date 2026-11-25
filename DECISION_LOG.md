@@ -28,6 +28,7 @@
 | PL-20 | 24.11.2026 | Grenzen ergänzt: Sprache und Lesen, Nachteilsausgleich | fachliche Aussagekraft |
 | PL-21 | 24.11.2026 | Auswertung Klasse 9 nach Kompetenzbereich in den Bericht aufgenommen | gedeckt durch F2 bis F5; Frage statt Ursache |
 | PL-22 | 24.11.2026 | Interaktives Dashboard aus den Ergebnissen entwickeln | statische HTML-Datei im Rahmen von PL-6 |
+| PL-23 | 25.11.2026 | Dashboard über GitHub Pages veröffentlicht | leichter Zugang, persönliche Unterlagen bleiben lokal |
 
 Die Empfehlungen stammten jeweils vom KI-Assistenten, die Entscheidung von der Projektleitung.
 

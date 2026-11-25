@@ -5,6 +5,8 @@ Demonstrator für modulares Datenmanagement und Kompetenzmonitoring in Mathemati
 > **Eigenständiger Prototyp.** Kein Produkt und keine Veröffentlichung des Bildungsministeriums Mecklenburg-Vorpommern.
 > Individuelle Kompetenzdaten sind **vollständig simuliert** und sagen nichts über reale Kinder oder Schulen aus.
 
+**[Dashboard im Browser öffnen](https://susannschmelzer29-lab.github.io/ebse-datenbruecke-mv/dashboard/dashboard.html)** · [Ausführlicher Bericht](https://susannschmelzer29-lab.github.io/ebse-datenbruecke-mv/dashboard/index.html)
+
 ## Fragestellung
 
 Wie können unterschiedliche Bildungsdatenquellen strukturiert, qualitätsgesichert und integriert werden, damit
@@ -24,8 +26,7 @@ Kompetenzentwicklungen transparent und reproduzierbar auswertbar sind?
 
 ## Ansehen
 
-- **Dashboard (interaktiv):** `dashboard/dashboard.html` herunterladen und im Browser öffnen, kein Server nötig
-- **Ausführlicher Bericht:** `dashboard/index.html`
+- [Dashboard](https://susannschmelzer29-lab.github.io/ebse-datenbruecke-mv/dashboard/dashboard.html) (interaktiv) und [ausführlicher Bericht](https://susannschmelzer29-lab.github.io/ebse-datenbruecke-mv/dashboard/index.html), auch ohne Internet nutzbar: Dateien in `dashboard` herunterladen
 - [Datenqualitätsbericht](reports/datenqualitaetsbericht.md) · [Bildungsanalyse](reports/bildungsanalyse.md)
 - [Datenquellen](docs/data_sources.md) · [Datenmodell](docs/data_model.md) · [Datenwörterbuch](docs/data_dictionary.md)
 - [Machbarkeitsanalyse](docs/feasibility_analysis.md) · [Grenzen](docs/limitations.md) · [Entscheidungen](DECISION_LOG.md)
