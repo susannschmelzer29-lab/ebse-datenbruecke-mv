@@ -11,7 +11,7 @@ from src.config import DB, PROCESSED, SIMULATED
 from src.ingestion.fetch import fetch_all
 from src.ingestion.parse_real import parse_all
 from src.quality import checks
-from src.reporting import charts, report
+from src.reporting import charts, dashboard, report
 from src.transformation.build_db import baue
 from src.transformation.simulate import simuliere
 
@@ -42,10 +42,11 @@ def main() -> None:
     r = analysiere(e["con"])
     charts.alle(r)
     print("4/4 Berichte")
-    report.schreibe(e["con"], r, e["leistung"], e["abgleich"], e["real"].quelle_id.value_counts().to_dict(),
-                    len(e["roh"]), len(e["sauber"]))
+    n_real = e["real"].quelle_id.value_counts().to_dict()
+    report.schreibe(e["con"], r, e["leistung"], e["abgleich"], n_real, len(e["roh"]), len(e["sauber"]))
+    dashboard.schreibe(e["con"], r, e["abgleich"], n_real)
     e["con"].close()
-    print("Fertig. Bericht öffnen: dashboard/index.html")
+    print("Fertig. Öffnen: dashboard/dashboard.html (interaktiv) oder dashboard/index.html (Bericht)")
 
 
 if __name__ == "__main__":

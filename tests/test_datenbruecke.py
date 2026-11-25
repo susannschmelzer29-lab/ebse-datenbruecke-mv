@@ -296,6 +296,28 @@ def test_testlaenge_passt_zum_hauptlauf(lauf):
 
 
 @real
+def test_dashboard_daten_stimmen_und_sind_sicher(lauf, tmp_path, monkeypatch):
+    from src.reporting import dashboard
+    monkeypatch.setattr(dashboard, "DASHBOARD", tmp_path)
+    con, r = lauf["con"], analysis.analysiere(lauf["con"])
+    n = lauf["real"].quelle_id.value_counts().to_dict()
+    dashboard.schreibe(con, r, lauf["abgleich"], n)
+    html = (tmp_path / "dashboard.html").read_text(encoding="utf-8")
+    d = json.loads(re.search(r'id="daten">(.*?)</script>', html, re.S)[1])
+    assert d["k9"]["werte"]["mittelwert"]["SEK1-2"]["2024"]["mv"] == 453
+    assert [k for k, v in d["k9"]["sig"].items() if v["2024"]] == ["SEK1-2"]
+    for kl, voll, ohne in (("5", 15248, 14539), ("6", 15330, 14543)):
+        z = d["dq"]["schueler"][kl]
+        assert sum(x["wert"] for x in z) == voll and sum(x["wert"] for x in z if not x["nur04"]) == ohne
+    urteile = {v["frage"]: v["erlaubt"] for v in d["vergleiche"]}
+    assert urteile["M-V mit Deutschland, Klasse 9, 2024"] and not urteile["Klasse 4 (2021) mit Klasse 9 (2024)"]
+    assert not urteile["Fiktive Kinder mit IQB Klasse 9"] and sum(urteile.values()) == 4
+    assert "SIM-K" not in html and "SIM-S" not in html          # keine Einzeldatensätze
+    assert not re.search(r'(src|href)="https?:', html)           # nichts wird nachgeladen
+    assert "Simulierte Daten." in html and "CC BY-NC-SA 4.0" in html
+
+
+@real
 def test_zwei_laeufe_sind_identisch(lauf, tmp_path):
     zwei = verarbeite(tmp_path / "b.sqlite", log=lambda *_: None)
     assert list(lauf["con"].iterdump()) == list(zwei["con"].iterdump())

@@ -24,7 +24,8 @@ Kompetenzentwicklungen transparent und reproduzierbar auswertbar sind?
 
 ## Ansehen
 
-- **Bericht:** `dashboard/index.html` herunterladen und im Browser öffnen, kein Server nötig
+- **Dashboard (interaktiv):** `dashboard/dashboard.html` herunterladen und im Browser öffnen, kein Server nötig
+- **Ausführlicher Bericht:** `dashboard/index.html`
 - [Datenqualitätsbericht](reports/datenqualitaetsbericht.md) · [Bildungsanalyse](reports/bildungsanalyse.md)
 - [Datenquellen](docs/data_sources.md) · [Datenmodell](docs/data_model.md) · [Datenwörterbuch](docs/data_dictionary.md)
 - [Machbarkeitsanalyse](docs/feasibility_analysis.md) · [Grenzen](docs/limitations.md) · [Entscheidungen](DECISION_LOG.md)
@@ -73,7 +74,7 @@ Rohdaten (unverändert, SHA-256)           Simulation (fester Startwert)
 | `data/simulated` | simulierte Daten, Fehlerprotokoll, Parameter |
 | `database` | Schema und Beispielabfragen |
 | `src` | Programmcode |
-| `tests` | 38 automatisierte Tests |
+| `tests` | 39 automatisierte Tests |
 | `docs`, `reports`, `dashboard` | Dokumentation und Ergebnisse |
 
 ## Arbeitsweise

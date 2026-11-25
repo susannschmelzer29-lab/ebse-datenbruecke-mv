@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EBSE-Datenbrücke M-V: Dashboard</title>
+<style>
+:root{color-scheme:light;--bg:#eef1f3;--fl:#fcfcfb;--tx:#0b0b0b;--tx2:#52514e;--li:#d9dcdf;--gr:#e4e3df;--s1:#2a78d6;--s2:#eb6834;
+--ak:#174b7a;--akbg:#e4eef8;--sim:#8a3b12;--simbg:#fbe9de;--gut:#006300;--stop:#a32020}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#111213;--fl:#1a1a19;--tx:#f0efec;--tx2:#c3c2b7;--li:#3a3b3c;--gr:#383835;
+--s1:#3987e5;--s2:#d95926;--ak:#9cc6f2;--akbg:#16283a;--sim:#f0b48f;--simbg:#3a2114;--gut:#6fcf6f;--stop:#f08a8a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 "Segoe UI",system-ui,sans-serif}
+main{max-width:1140px;margin:0 auto;padding:24px 16px 56px}
+h1{font-size:26px;line-height:1.2;margin:0}h2{font-size:18px;margin:0 0 2px;line-height:1.3}
+p{margin:6px 0;max-width:74ch}.klein{font-size:14px;color:var(--tx2)}
+.tabs{display:flex;flex-wrap:wrap;gap:2px;margin:18px 0 0;border-bottom:1px solid var(--li)}
+.tabs button{font:inherit;color:var(--tx2);background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;cursor:pointer}
+.tabs button[aria-selected=true]{color:var(--tx);border-bottom-color:var(--ak);font-weight:600}
+.marke{padding:8px 12px;margin:16px 0 0;border-left:4px solid;font-size:15px;max-width:none}
+.marke.real{background:var(--akbg);border-color:var(--ak)}.marke.sim{background:var(--simbg);border-color:var(--sim)}
+.filter{display:flex;flex-wrap:wrap;gap:14px;align-items:end;margin:16px 0}
+.filter label{display:grid;grid-template-columns:minmax(0,auto);max-width:100%;min-width:0;gap:3px;font-size:14px;color:var(--tx2)}
+select{font:inherit;color:var(--tx);background:var(--fl);border:1px solid var(--li);border-radius:4px;padding:7px 10px;max-width:100%}
+.kacheln{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin:16px 0}
+.kachel{background:var(--fl);border:1px solid var(--li);padding:12px 14px}
+.kachel span{display:block;font-size:14px;color:var(--tx2)}.kachel b{display:block;font-size:26px;line-height:1.25}
+.raster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:820px){.raster{grid-template-columns:minmax(0,1fr)}}
+.karte{background:var(--fl);border:1px solid var(--li);padding:14px 16px;margin-bottom:12px;min-width:0}
+.raster .karte{margin-bottom:0}
+.leg{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;color:var(--tx2);margin:6px 0}
+.leg i{display:inline-block;width:18px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.leg i.f{width:12px;height:12px}
+svg{display:block;width:100%;height:auto;overflow:visible}svg text{font:13px "Segoe UI",system-ui,sans-serif;fill:var(--tx2)}
+svg text.w{fill:var(--tx)}svg [tabindex]:focus{outline:2px solid var(--ak);outline-offset:2px}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--li);vertical-align:top}td{font-variant-numeric:tabular-nums}
+details{margin-top:8px}summary{cursor:pointer;color:var(--ak);font-size:15px;padding:4px 0}
+#tip{position:fixed;pointer-events:none;background:var(--fl);color:var(--tx);border:1px solid var(--li);box-shadow:0 2px 8px #0003;padding:8px 10px;font-size:14px;max-width:300px;z-index:9}
+#tip[hidden]{display:none}#tip div{display:flex;gap:8px;align-items:center}#tip i{width:14px;height:3px;flex:none}#tip small{color:var(--tx2)}
+.urteil{border-left:4px solid;padding:10px 14px;margin-top:12px;background:var(--bg)}
+.urteil b{display:block}.urteil.ja{border-color:var(--gut)}.urteil.ja b{color:var(--gut)}.urteil.nein{border-color:var(--stop)}.urteil.nein b{color:var(--stop)}
+.aussagen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}@media (max-width:900px){.aussagen{grid-template-columns:minmax(0,1fr)}}
+.aussagen ul{margin:8px 0 0;padding-left:18px}.aussagen li{margin-bottom:8px}.aussagen small{display:block;color:var(--tx2)}
+footer{margin-top:28px;font-size:14px;color:var(--tx2)}a{color:var(--ak)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<h1>EBSE-Datenbrücke M-V</h1>
+<p class="klein">Datenqualität und Kompetenzmonitoring Mathematik. Eigenständiger Demonstrator, keine Veröffentlichung des Bildungsministeriums M-V.</p>
+<div class="tabs" role="tablist" aria-label="Bereiche">
+<button role="tab" id="t-k9" aria-controls="k9" aria-selected="true">Klasse 9</button>
+<button role="tab" id="t-dq" aria-controls="dq" aria-selected="false" tabindex="-1">Datenqualität</button>
+<button role="tab" id="t-sim" aria-controls="sim" aria-selected="false" tabindex="-1">Klasse 5/6 (simuliert)</button>
+<button role="tab" id="t-aus" aria-controls="aus" aria-selected="false" tabindex="-1">Was darf man sagen?</button>
+</div>
+
+<section id="k9" role="tabpanel" aria-labelledby="t-k9">
+<p class="marke real"><strong>Reale Daten.</strong> IQB-Bildungstrend 2024, Stichprobe auf Landesebene. Kein Schluss auf Klasse 5/6, keine Ursachen.</p>
+<div class="filter">
+<label>Kompetenzbereich<select id="f-ber"></select></label>
+<label>Kennzahl<select id="f-kz"><option value="mittelwert">Mittelwert (IQB-Skala)</option><option value="ms_msa_verfehlt">Mindeststandard MSA verfehlt (%)</option></select></label>
+</div>
+<div class="kacheln" id="k9-kacheln"></div>
+<div class="raster">
+<div class="karte"><h2 id="tr-titel"></h2><div class="leg" data-leg="land"></div><div id="tr"></div>
+<details><summary>Werte und Fundstellen</summary><div class="tw" id="tr-tab"></div></details></div>
+<div class="karte"><h2 id="be-titel"></h2><div class="leg" data-leg="land"></div><div id="be"></div>
+<p class="klein" id="be-hinweis"></p></div>
+</div>
+</section>
+
+<section id="dq" role="tabpanel" aria-labelledby="t-dq" hidden>
+<p class="marke real"><strong>Reale Daten.</strong> Amtliche Statistik und IQB-Tabellen. Jeder Wert ist bis zur Originalzelle nachverfolgbar.</p>
+<div class="kacheln" id="dq-kacheln"></div>
+<div class="filter">
+<label>Klassenstufe (Schülerzahlen)<select id="f-kl"><option value="5">Klasse 5</option><option value="6">Klasse 6</option></select></label>
+<label>Quelle (Befunde)<select id="f-q"></select></label>
+</div>
+<div class="karte"><h2 id="sz-titel"></h2><p class="klein" id="sz-text"></p>
+<div class="leg"><span><i class="f" style="background:var(--s1)"></i>in beiden Tabellen</span><span><i class="f" style="background:var(--s2)"></i>nur in Tabelle 04</span></div><div id="sz"></div></div>
+<div class="karte"><h2 id="bf-titel"></h2><div class="tw" id="bf"></div></div>
+</section>
+
+<section id="sim" role="tabpanel" aria-labelledby="t-sim" hidden>
+<p class="marke sim"><strong>Simulierte Daten.</strong> Alle Kinder und Schulen sind erfunden. Keine Aussage über reale Kinder, Schulen oder das Land.</p>
+<div class="karte" style="margin-top:16px"><h2>Lösungsanteil nach Leitidee, 20 Aufgaben</h2><div class="leg"><span><i style="background:var(--s1)"></i>Beginn Klasse 5</span><span><i style="background:var(--s2)"></i>Beginn Klasse 6</span></div>
+<div id="pr"></div><p class="klein">Striche: 95-%-Intervalle (Bootstrap über Schulen). Achse beginnt nicht bei null.</p><details><summary>Werte</summary><div class="tw" id="pr-tab"></div></details></div>
+<div class="filter"><label>Testlänge ausprobieren<select id="f-tl"></select></label></div>
+<div class="kacheln" id="sim-kacheln"></div>
+<div class="karte"><h2>Wie oft ist das Band eines fiktiven Kindes falsch?</h2><div class="leg"><span><i style="background:var(--s1)"></i>einzelne Leitidee</span><span><i style="background:var(--s2)"></i>Gesamtergebnis</span></div>
+<div id="tl"></div><details><summary>Werte</summary><div class="tw" id="tl-tab"></div></details>
+<p class="klein">Für einzelne Kinder gilt nur das Gesamtergebnis, und nie als alleinige Grundlage für Förderung (PL-19).</p></div>
+</section>
+
+<section id="aus" role="tabpanel" aria-labelledby="t-aus" hidden>
+<div class="karte" style="margin-top:16px"><h2>Darf ich das vergleichen?</h2><p class="klein">Das Urteil stammt aus der Vergleichssperre des Systems. Ohne begründete Freigabe gilt: nicht vergleichbar.</p>
+<div class="filter" style="margin-bottom:0"><label>Vergleich<select id="f-v"></select></label></div><div class="urteil" id="v-urteil" aria-live="polite"></div></div>
+<div class="aussagen">
+<div class="karte"><h2>Gut belegt</h2><p class="klein">Reale, veröffentlichte Daten</p><ul id="a-1"></ul></div>
+<div class="karte"><h2>Nur unter Annahmen</h2><p class="klein">Demonstrator und Simulation</p><ul id="a-2"></ul></div>
+<div class="karte"><h2>Nicht zulässig</h2><p class="klein">Und warum</p><ul id="a-3"></ul></div>
+</div>
+</section>
+
+<footer>
+<p>Quellen: IQB-Bildungstrend 2024, Zusatzmaterial Tabellen, Stanat et al. (Hrsg.), Stand 25.06.2026, CC BY-NC-SA 4.0, Auswahl und Darstellung verändert. Statistisches Bundesamt (Destatis), Allgemeinbildende Schulen 2025/26. Statistisches Amt Mecklenburg-Vorpommern, B1131 2025 00. Eigene Auswahl und Darstellung.</p>
+<p>Automatisch erzeugt aus der Projektdatenbank. <a href="index.html">Ausführlicher Bericht</a></p>
+</footer>
+</main>
+<div id="tip" hidden role="status"></div>
+<script type="application/json" id="daten">{"k9": {"bereiche": [{"id": "SEK1-0", "name": "Globalskala"}, {"id": "SEK1-1", "name": "Zahl"}, {"id": "SEK1-2", "name": "Messen"}, {"id": "SEK1-3", "name": "Raum und Form"}, {"id": "SEK1-4", "name": "Funktionaler Zusammenhang"}, {"id": "SEK1-5", "name": "Daten und Zufall"}], "werte": {"mittelwert": {"SEK1-0": {"2012": {"mv": 505.0, "mv_se": 3.0, "de": 500.0, "de_se": 2.0, "regel": "F3", "fund": "Tab. 4.1web B14"}, "2018": {"mv": 482.0, "mv_se": 3.5, "de": 499.0, "de_se": 1.2, "regel": "F3", "fund": "Tab. 4.1web I14"}, "2024": {"mv": 471.0, "mv_se": 2.6, "de": 474.0, "de_se": 1.2, "regel": "F3", "fund": "Tab. 4.1web P14"}}, "SEK1-1": {"2012": {"mv": 512.0, "mv_se": 4.0, "de": 500.0, "de_se": 2.0, "regel": "F3", "fund": "Tab. 4.2web B14"}, "2018": {"mv": 479.0, "mv_se": 3.6, "de": 495.0, "de_se": 1.2, "regel": "F3", "fund": "Tab. 4.2web I14"}, "2024": {"mv": 471.0, "mv_se": 2.9, "de": 472.0, "de_se": 1.1, "regel": "F3", "fund": "Tab. 4.2web P14"}}, "SEK1-2": {"2012": {"mv": 485.0, "mv_se": 4.0, "de": 500.0, "de_se": 2.0, "regel": "F3", "fund": "Tab. 4.3web B14"}, "2018": {"mv": 466.0, "mv_se": 3.4, "de": 493.0, "de_se": 1.1, "regel": "F3", "fund": "Tab. 4.3web I14"}, "2024": {"mv": 453.0, "mv_se": 2.7, "de": 468.0, "de_se": 1.2, "regel": "F3", "fund": "Tab. 4.3web P14"}}, "SEK1-3": {"2012": {"mv": 505.027, "mv_se": 3.66, "de": 500.0, "de_se": 1.579, "regel": "F3", "fund": "Tab. 4.4web B14"}, "2018": {"mv": 479.784, "mv_se": 3.409, "de": 497.332, "de_se": 1.126, "regel": "F3", "fund": "Tab. 4.4web I14"}, "2024": {"mv": 466.826, "mv_se": 3.084, "de": 471.929, "de_se": 1.162, "regel": "F3", "fund": "Tab. 4.4web P14"}}, "SEK1-4": {"2012": {"mv": 516.068, "mv_se": 3.369, "de": 500.0, "de_se": 1.59, "regel": "F3", "fund": "Tab. 4.5web B14"}, "2018": {"mv": 486.05, "mv_se": 3.858, "de": 496.487, "de_se": 1.247, "regel": "F3", "fund": "Tab. 4.5web I14"}, "2024": {"mv": 478.291, "mv_se": 2.803, "de": 474.603, "de_se": 1.171, "regel": "F3", "fund": "Tab. 4.5web P14"}}, "SEK1-5": {"2012": {"mv": 508.935, "mv_se": 3.635, "de": 500.0, "de_se": 1.483, "regel": "F3", "fund": "Tab. 4.6web B14"}, "2018": {"mv": 489.824, "mv_se": 3.837, "de": 502.288, "de_se": 1.161, "regel": "F3", "fund": "Tab. 4.6web I14"}, "2024": {"mv": 480.8, "mv_se": 2.733, "de": 479.059, "de_se": 1.288, "regel": "F3", "fund": "Tab. 4.6web P14"}}}, "ms_msa_verfehlt": {"SEK1-0": {"2012": {"mv": 19.7, "mv_se": 2.0, "de": 25.0, "de_se": 0.7, "regel": "F4", "fund": "Tab. 3.25web C22"}, "2018": {"mv": 29.0, "mv_se": 1.7, "de": 24.3, "de_se": 0.6, "regel": "F4", "fund": "Tab. 3.25web F22"}, "2024": {"mv": 33.8, "mv_se": 1.4, "de": 34.1, "de_se": 0.6, "regel": "F4", "fund": "Tab. 3.25web I22"}}, "SEK1-1": {"2012": {"mv": 19.5, "mv_se": 1.8, "de": 24.5, "de_se": 0.7, "regel": "F4", "fund": "Tab. 3.26web C22"}, "2018": {"mv": 31.0, "mv_se": 1.8, "de": 25.6, "de_se": 0.6, "regel": "F4", "fund": "Tab. 3.26web F22"}, "2024": {"mv": 32.7, "mv_se": 1.7, "de": 33.8, "de_se": 0.5, "regel": "F4", "fund": "Tab. 3.26web I22"}}, "SEK1-2": {"2012": {"mv": 27.7, "mv_se": 2.0, "de": 24.9, "de_se": 0.7, "regel": "F4", "fund": "Tab. 3.27web C22"}, "2018": {"mv": 36.5, "mv_se": 1.9, "de": 26.1, "de_se": 0.6, "regel": "F4", "fund": "Tab. 3.27web F22"}, "2024": {"mv": 41.0, "mv_se": 1.6, "de": 35.0, "de_se": 0.6, "regel": "F4", "fund": "Tab. 3.27web I22"}}, "SEK1-3": {"2012": {"mv": 18.8, "mv_se": 2.0, "de": 24.3, "de_se": 0.7, "regel": "F4", "fund": "Tab. 3.28web C22"}, "2018": {"mv": 28.8, "mv_se": 1.7, "de": 23.9, "de_se": 0.6, "regel": "F4", "fund": "Tab. 3.28web F22"}, "2024": {"mv": 35.1, "mv_se": 1.6, "de": 33.8, "de_se": 0.6, "regel": "F4", "fund": "Tab. 3.28web I22"}}, "SEK1-4": {"2012": {"mv": 16.7, "mv_se": 1.8, "de": 25.5, "de_se": 0.7, "regel": "F4", "fund": "Tab. 3.29web C22"}, "2018": {"mv": 29.3, "mv_se": 1.8, "de": 26.3, "de_se": 0.6, "regel": "F4", "fund": "Tab. 3.29web F22"}, "2024": {"mv": 30.5, "mv_se": 1.6, "de": 34.3, "de_se": 0.6, "regel": "F4", "fund": "Tab. 3.29web I22"}}, "SEK1-5": {"2012": {"mv": 17.7, "mv_se": 1.9, "de": 24.8, "de_se": 0.7, "regel": "F4", "fund": "Tab. 3.30web C22"}, "2018": {"mv": 27.4, "mv_se": 1.9, "de": 23.7, "de_se": 0.6, "regel": "F4", "fund": "Tab. 3.30web F22"}, "2024": {"mv": 28.5, "mv_se": 1.6, "de": 32.0, "de_se": 0.6, "regel": "F4", "fund": "Tab. 3.30web I22"}}}}, "sig": {"SEK1-0": {"2012": 0, "2018": 1, "2024": 0}, "SEK1-1": {"2012": 1, "2018": 1, "2024": 0}, "SEK1-2": {"2012": 1, "2018": 1, "2024": 1}, "SEK1-3": {"2012": 0, "2018": 1, "2024": 0}, "SEK1-4": {"2012": 1, "2018": 1, "2024": 0}, "SEK1-5": {"2012": 1, "2018": 1, "2024": 0}}, "delta": {"SEK1-0": {"de": -26.0, "mv": -34.0, "se": 4.4, "sig": 1}, "SEK1-1": {"de": -28.0, "mv": -41.0, "se": 5.2, "sig": 1}, "SEK1-2": {"de": -32.0, "mv": -32.0, "se": 5.3, "sig": 1}, "SEK1-3": {"de": -28.071, "mv": -38.201, "se": 5.788, "sig": 1}, "SEK1-4": {"de": -25.397, "mv": -37.777, "se": 4.74, "sig": 1}, "SEK1-5": {"de": -20.941, "mv": -28.135, "se": 5.269, "sig": 1}}}, "dq": {"schueler": {"5": [{"art": "Regionale Schule", "wert": 12152, "nur04": false}, {"art": "Gesamtschule", "wert": 1698, "nur04": false}, {"art": "Gymnasium", "wert": 689, "nur04": false}, {"art": "Förderschule", "wert": 565, "nur04": true}, {"art": "Waldorfschule", "wert": 144, "nur04": true}], "6": [{"art": "Regionale Schule", "wert": 12223, "nur04": false}, {"art": "Gesamtschule", "wert": 1658, "nur04": false}, {"art": "Förderschule", "wert": 669, "nur04": true}, {"art": "Gymnasium", "wert": 662, "nur04": false}, {"art": "Waldorfschule", "wert": 118, "nur04": true}]}, "befunde": [["DQ03", "Q3", "Q3 / Tab. 4.4web / R22 und 1 weitere", "-1.6", "Negativer Standardfehler ist rechnerisch unmöglich", "Standardfehler verworfen, Wert bleibt; Vorzeichen wird nicht geraten"], ["DQ03", "Q3", "Q3 / Tab. 4.4web / Y22 und 1 weitere", "-2.4", "Negativer Standardfehler ist rechnerisch unmöglich", "Standardfehler verworfen, Wert bleibt; Vorzeichen wird nicht geraten"], ["DQ03", "Q3", "Q3 / Tab. 4.5web / R22 und 1 weitere", "-1.5", "Negativer Standardfehler ist rechnerisch unmöglich", "Standardfehler verworfen, Wert bleibt; Vorzeichen wird nicht geraten"], ["DQ03", "Q3", "Q3 / Tab. 4.6web / R22", "-1.7", "Negativer Standardfehler ist rechnerisch unmöglich", "Standardfehler verworfen, Wert bleibt; Vorzeichen wird nicht geraten"], ["DQ03", "Q3", "Q3 / Tab. 4.8web / N22", "-0.9", "Negativer Standardfehler ist rechnerisch unmöglich", "Standardfehler verworfen, Wert bleibt; Vorzeichen wird nicht geraten"], ["DQ04", "Q2", "Q2 / Tab. 4.1web / AD14 und 53 weitere", "Mecklenburg-Vormpommern", "Schreibweise weicht ab, gemeint: Mecklenburg-Vorpommern", "über dokumentierte Aliasliste zugeordnet, Rohwert erhalten"], ["DQ04", "Q3", "Q3 / Tab. 3.13web / C28 und 89 weitere", "Niedersachen", "Schreibweise weicht ab, gemeint: Niedersachsen", "über dokumentierte Aliasliste zugeordnet, Rohwert erhalten"], ["DQ07", "Q1", "Q1 / csv-21111-04 / I9839 und 1 weitere", "689", "Gymnasium umfasst laut Q4 die Jahrgänge 7 bis 12, hier Klasse 5", "Wert bleibt gültig, Ausnahme fachlich klären"], ["DQ07", "Q1", "Q1 / csv-21111-04 / I9848", "662", "Gymnasium umfasst laut Q4 die Jahrgänge 7 bis 12, hier Klasse 6", "Wert bleibt gültig, Ausnahme fachlich klären"], ["DQ07", "Q4", "Q4 / Tabelle 1.9, S. 18 / Jg. 5, Wertspalte 4", "689", "Gymnasium umfasst laut Q4 die Jahrgänge 7 bis 12, hier Klasse 5", "Wert bleibt gültig, Ausnahme fachlich klären"], ["DQ07", "Q4", "Q4 / Tabelle 1.9, S. 18 / Jg. 6, Wertspalte 4", "662", "Gymnasium umfasst laut Q4 die Jahrgänge 7 bis 12, hier Klasse 6", "Wert bleibt gültig, Ausnahme fachlich klären"], ["DQ08", "Q2", "Q2 / Tab. 3.25web", "7.3999999999999995", "92 Werte mit Gleitkommaresten", "auf 6 Nachkommastellen gerundet, Rohwert erhalten"], ["DQ08", "Q2", "Q2 / Tab. 3.26web", "3.3000000000000003", "53 Werte mit Gleitkommaresten", "auf 6 Nachkommastellen gerundet, Rohwert erhalten"], ["DQ08", "Q2", "Q2 / Tab. 3.27web", "3.5000000000000004", "63 Werte mit Gleitkommaresten", "auf 6 Nachkommastellen gerundet, Rohwert erhalten"], ["DQ08", "Q2", "Q2 / Tab. 3.28web", "8.200000000000001", "71 Werte mit Gleitkommaresten", "auf 6 Nachkommastellen gerundet, Rohwert erhalten"], ["DQ08", "Q2", "Q2 / Tab. 3.29web", "31.900000000000002", "77 Werte mit Gleitkommaresten", "auf 6 Nachkommastellen gerundet, Rohwert erhalten"], ["DQ08", "Q2", "Q2 / Tab. 3.30web", "5.8999999999999995", "59 Werte mit Gleitkommaresten", "auf 6 Nachkommastellen gerundet, Rohwert erhalten"], ["DQ08", "Q4", "Q4 / Tabelle 1.9, S. 18", "15.248", "6 Werte mit deutschem Tausenderpunkt (15.248 bedeutet 15248)", "nach Zahlenvertrag der Quelle umgewandelt"], ["DQ09", "Q3", "Q3", "keine Angabe gefunden", "Keine Lizenzangabe gefunden", "Rohdatei wird nicht weitergegeben, Klärung mit Herausgeber"], ["DQ11", "Q1", "csv-21111-07, Klasse 6", "14543 / 13881", "Schularten ergeben 662 weniger als Insgesamt; vorhanden: Gesamtschule, Regionale Schule", "Summenzeile der Quelle verwendet, fehlende Zeile nicht ergänzt"], ["DQ11", "Q3", "Q3", "", "Mecklenburg-Vorpommern hat keine Ergebniszeilen", "als 'nicht ausgewiesen' mit Grund geführt, kein Ersatzwert"], ["DQ12", "Q1", "Klasse 5, Tabellen 04 und 07", "15248 / 14539", "Differenz entspricht genau Förder- und Waldorfschulen", "Verfahren getrennt geführt, Vergleich gesperrt (S6)"], ["DQ12", "Q1", "Klasse 6, Tabellen 04 und 07", "15330 / 14543", "Differenz entspricht genau Förder- und Waldorfschulen", "Verfahren getrennt geführt, Vergleich gesperrt (S6)"]], "quellen": [["Q1", "Q1: Statistischer Bericht Allgemeinbildende Schulen 2025/26"], ["Q2", "Q2: IQB-Bildungstrend 2024, Zusatzmaterial Tabellen (Klasse 9)"], ["Q3", "Q3: IQB-Bildungstrend 2021, Zusatzmaterial Tabellen (Klasse 4)"], ["Q4", "Q4: Statistischer Bericht B1131 2025 00, Allgemeinbildende Schulen Teil 1"]], "kacheln": [["Reale Werte mit Fundstelle", "3.914"], ["Destatis und Stat. Amt gleich", "12 von 12"], ["Unmögliche Standardfehler", "8"], ["Skalen ohne M-V-Wert (Kl. 4, 2021)", "6 von 6"]]}, "sim": {"profil": [{"id": "L1", "name": "Zahl und Operation", "diff": 8.759328358208956, "T1": [61.326352530541016, 57.10254784257086, 65.51159318562996], "T2": [70.47491039426524, 67.27668425324674, 73.47907283972857]}, {"id": "L2", "name": "Größen und Messen", "diff": 6.063432835820896, "T1": [53.174740484429066, 49.093721266453734, 57.375335113585066], "T2": [59.721723518850986, 56.34859134353167, 63.2144634830735]}, {"id": "L3", "name": "Strukturen und funktionaler Zusammenhang", "diff": 10.092764378478664, "T1": [47.27748691099477, 43.57072044334975, 50.883621112002494], "T2": [57.52212389380531, 54.666371681415924, 60.42098496426948]}, {"id": "L4", "name": "Raum und Form", "diff": 2.0408163265306123, "T1": [56.78756476683938, 53.17693796527502, 60.505373055640405], "T2": [59.044642857142854, 56.0868034118217, 62.21341139094935]}, {"id": "L5", "name": "Daten und Zufall", "diff": 3.8756855575868374, "T1": [54.75903614457831, 51.06321673080398, 58.52482728842831], "T2": [58.630742049469966, 55.84182867040206, 61.23906879058694]}], "laenge": [{"n": 10, "leit": 32.56, "ges": 17.4}, {"n": 20, "leit": 25.93, "ges": 12.37}, {"n": 40, "leit": 18.73, "ges": 9.03}, {"n": 60, "leit": 15.43, "ges": 7.2}, {"n": 100, "leit": 11.84, "ges": 5.64}]}, "vergleiche": [{"frage": "M-V mit Deutschland, Klasse 9, 2024", "erlaubt": true, "text": "Regel F3: Vergleich mit Deutschland im selben Jahr, Test und Kompetenzbereich ist Zweck der Studie. Kein Ranking."}, {"frage": "M-V 2012 mit M-V 2024, Klasse 9", "erlaubt": true, "text": "Regel F2: Das IQB weist diese Trends selbst aus. Differenzen und Standardfehler werden aus der Quelle übernommen, nicht neu berechnet."}, {"frage": "Klasse 4 (2021) mit Klasse 9 (2024)", "erlaubt": false, "text": "S1 gesperrt: Klasse 4 und Klasse 9: andere Kohorten, Tests und Skalen. Kein Lernverlauf ableitbar."}, {"frage": "M-V mit Deutschland, Klasse 4, 2021", "erlaubt": false, "text": "Mindestens ein Wert ist nicht ausgewiesen. Fehlend ist nicht null."}, {"frage": "„Messen“ mit „Zahl“, Klasse 9, M-V", "erlaubt": false, "text": "Unterschiedliche Kompetenzbereiche oder Rahmen."}, {"frage": "Mittelwert mit Mindeststandard-Anteil, Klasse 9", "erlaubt": false, "text": "S7 gesperrt: Alle Neuntklässler gegenüber nur zielgleich Unterrichteten: verschiedene Grundgesamtheiten."}, {"frage": "Schülerzahl: Destatis mit Statistischem Amt M-V", "erlaubt": true, "text": "Regel F1: Gleiches Schuljahr, gleiche Grundgesamtheit. Dient nur als Plausibilitätsabgleich."}, {"frage": "Schülerzahl: Destatis Tabelle 04 mit Tabelle 07", "erlaubt": false, "text": "S6 gesperrt: Verschiedene Grundgesamtheiten: Die Wiederholertabelle enthält für M-V keine Förder- und Waldorfschulen."}, {"frage": "Fiktive Kinder: Beginn Klasse 5 mit Beginn Klasse 6", "erlaubt": true, "text": "Regel F6: Beide Messzeitpunkte nutzen per Konstruktion dasselbe fiktive Instrument, gepaart je Kind."}, {"frage": "Fiktive Kinder mit IQB Klasse 9", "erlaubt": false, "text": "S3 gesperrt: Simulierte Werte dürfen nie mit realen Ergebnissen verglichen werden."}], "aussagen": [[["Klasse 9, 2024: M-V 471, Deutschland 474 auf der Gesamtskala.", "Laut IQB kein signifikanter Unterschied."], ["Nur „Messen“ liegt 2024 signifikant darunter (453 zu 468).", "Ebenso 2012 und 2018."], ["Alle fünf Bereiche sind in M-V seit 2012 signifikant gesunken.", "Angabe des IQB."], ["33,8 % der zielgleich Unterrichteten verfehlen den Mindeststandard MSA.", "Deutschland 34,1 %."], ["Für Klasse 4 sind 2021 keine Ergebnisse für M-V ausgewiesen.", "Nur in einem Fünftel der vorgesehenen Schulen wurde getestet."], ["Klasse 5: 15.248 oder 14.539 Kinder, je nach Tabelle.", "Die Differenz entspricht Förder- und Waldorfschulen."]], [["Quellen lassen sich nachvollziehbar und wiederholbar zusammenführen.", "Gezeigt an vier Dateien."], ["20 Aufgaben je Leitidee: rund 26 % falsche Bänder, beim Gesamtergebnis 12 %.", "Simuliert."], ["Schulartunterschied bei 4 gegen 8 Schulen nicht gesichert.", "Simuliert, obwohl ein Unterschied eingebaut war."], ["Zwei Ämter melden gleiche Zahlen.", "Zeigt konsistente Weitergabe. Vermutlich dieselbe Erhebung, also keine unabhängige Bestätigung."], ["Einstieg über Dateien, langfristig modulare Plattform.", "Begründete Einschätzung, keine Messung."]], [["„Kinder in Klasse 5/6 sind schwach im Messen.“", "Keine öffentlichen Daten gefunden."], ["„Corona oder der Unterricht ist schuld.“", "Ursachen wurden nicht untersucht."], ["„Von Klasse 4 bis 9 wird es schlechter.“", "Andere Kinder, andere Tests, andere Skalen."], ["„Gesamtschulen sind besser.“", "Simuliert und nicht gesichert."], ["„In M-V gibt es keine Daten zu Klasse 5.“", "Nur öffentlich nicht gefunden. Intern möglich, etwa aus LEO.MV."], ["„Das System findet alle Fehler.“", "Nur solche, für die es Regeln gibt."]]]}</script>
+<script>
+"use strict";
+const D=JSON.parse(document.getElementById("daten").textContent),$=id=>document.getElementById(id);
+const nz=(v,n=0)=>v==null?"–":v.toFixed(n).replace(".",",").replace("-","−"),vz=(v,n=0)=>(v>0?"+":"")+nz(v,n);
+const tsd=v=>String(Math.round(v)).replace(/\B(?=(\d{3})+$)/g,".");
+function el(t,a={},...k){const e=document.createElement(t);for(const[x,y]of Object.entries(a))x==="text"?e.textContent=y:e.setAttribute(x,y);e.append(...k);return e}
+function sv(t,a={},text){const e=document.createElementNS("http://www.w3.org/2000/svg",t);for(const[x,y]of Object.entries(a))e.setAttribute(x,y);if(text!=null)e.textContent=text;return e}
+function leeren(e){e.replaceChildren();return e}
+function tabelle(ziel,kopf,zeilen){leeren(ziel).append(el("table",{},el("thead",{},el("tr",{},...kopf.map(k=>el("th",{text:k})))),el("tbody",{},...zeilen.map(z=>el("tr",{},...z.map(c=>el("td",{text:c})))))))}
+function kacheln(ziel,liste){leeren(ziel).append(...liste.map(([t,w])=>el("div",{class:"kachel"},el("span",{text:t}),el("b",{text:w}))))}
+function optionen(s,l){s.append(...l.map(([v,t])=>el("option",{value:v,text:t})))}
+/* Tooltip: gleiche Angaben bei Maus und Tastatur */
+const tip=$("tip");
+function zeige(e,titel,zeilen){leeren(tip).append(el("small",{text:titel}),...zeilen.map(([f,w,n])=>{const d=el("div"),i=el("i");if(f)i.style.background=`var(${f})`;d.append(...(f?[i]:[]),el("b",{text:w}),el("small",{text:n}));return d}));
+tip.hidden=false;const r=e.target.getBoundingClientRect(),x=e.clientX||r.left+r.width/2,y=e.clientY||r.top;
+tip.style.left=Math.max(8,Math.min(x+14,innerWidth-tip.offsetWidth-8))+"px";tip.style.top=(y+18+tip.offsetHeight>innerHeight?Math.max(8,y-tip.offsetHeight-12):y+18)+"px"}
+function weg(){tip.hidden=true}
+function aktiv(m,titel,zeilen){m.setAttribute("tabindex","0");m.setAttribute("role","img");m.setAttribute("aria-label",titel+": "+zeilen.map(z=>z[1]+" "+z[2]).join(", "));
+for(const t of["pointermove","focus"])m.addEventListener(t,e=>zeige(e,titel,zeilen));for(const t of["pointerleave","blur"])m.addEventListener(t,weg)}
+function flaeche(ziel,h){const w=Math.max(280,ziel.clientWidth||480);const s=sv("svg",{viewBox:`0 0 ${w} ${h}`,width:w,height:h});leeren(ziel).append(s);return[s,w]}
+const skala=(a,b,c,d)=>v=>c+(v-a)/(b-a)*(d-c);
+function ticks(a,b,n=5){const r=(b-a)/n,p=10**Math.floor(Math.log10(r)),s=[1,2,5,10].map(x=>x*p).find(x=>x>=r),o=[];for(let v=Math.ceil(a/s)*s;v<=b+1e-9;v+=s)o.push(v);return o}
+function rahmen(werte,puffer=.08,null0=false){let a=Math.min(...werte),b=Math.max(...werte),p=(b-a||1)*puffer;return[null0?0:a-p,b+p]}
+function punkt(s,x,y,f){s.append(sv("circle",{cx:x,cy:y,r:5.5,fill:`var(${f})`,stroke:"var(--fl)","stroke-width":2}))}
+
+/* ---------- Klasse 9 ---------- */
+const LAND=[["de","--s1","Deutschland"],["mv","--s2","Mecklenburg-Vorpommern"]];
+document.querySelectorAll("[data-leg=land]").forEach(l=>l.append(...LAND.map(([,f,n])=>{const s=el("span"),i=el("i");i.style.background=`var(${f})`;s.append(i,n);return s})));
+optionen($("f-ber"),D.k9.bereiche.map(b=>[b.id,b.name]));
+const einheit=kz=>kz==="mittelwert"?[0,""]:[1," %"];
+function k9(){
+ const id=$("f-ber").value,kz=$("f-kz").value,[n,ein]=einheit(kz),name=D.k9.bereiche.find(b=>b.id===id).name,w=D.k9.werte[kz][id],J=[2012,2018,2024],l=w[2024];
+ const sig=D.k9.sig[id],lage=kz!=="mittelwert"?"nicht erfasst":sig[2024]?(l.mv>l.de?"signifikant darüber":"signifikant darunter"):"nicht signifikant";
+ const abst=l.mv-l.de,ve=D.k9.delta[id];
+ kacheln($("k9-kacheln"),[["M-V 2024",nz(l.mv,n)+ein],["Deutschland 2024",nz(l.de,n)+ein],["Abstand M-V"+(ein?" (Prozentpunkte)":""),vz(abst,n)+(ein?" Pp.":"")],["Unterschied laut IQB",lage],
+  ...(kz==="mittelwert"?[["Veränderung M-V seit 2012 (* signifikant)",vz(ve.mv)+(ve.sig?" *":"")],["Veränderung Deutschland",vz(ve.de)]]:[])]);
+ $("k9-kacheln").querySelectorAll("b").forEach(b=>{if(b.textContent.length>9)b.style.fontSize="19px"});
+ $("tr-titel").textContent=`${name}: ${kz==="mittelwert"?"Mittelwert":"Anteil unter Mindeststandard MSA"} 2012 bis 2024`;
+ const alle=J.flatMap(j=>LAND.flatMap(([k])=>[w[j][k]-1.96*w[j][k+"_se"],w[j][k]+1.96*w[j][k+"_se"]]));
+ const[a,b]=rahmen(alle),[s,W]=flaeche($("tr"),270),H=270,x=skala(2012,2024,62,W-52),y=skala(a,b,H-34,12);
+ for(const t of ticks(a,b,6))s.append(sv("line",{x1:44,x2:W-8,y1:y(t),y2:y(t),stroke:"var(--gr)"}),sv("text",{x:38,y:y(t)+4,"text-anchor":"end"},nz(t)));
+ for(const j of J)s.append(sv("text",{x:x(j),y:H-10,"text-anchor":"middle"},j));
+ LAND.forEach(([k,f],i)=>{const v=i?5:-5;s.append(sv("path",{d:"M"+J.map(j=>`${x(j)+v},${y(w[j][k])}`).join("L"),fill:"none",stroke:`var(${f})`,"stroke-width":2,"stroke-linejoin":"round"}));
+  for(const j of J)s.append(sv("line",{x1:x(j)+v,x2:x(j)+v,y1:y(w[j][k]-1.96*w[j][k+"_se"]),y2:y(w[j][k]+1.96*w[j][k+"_se"]),stroke:`var(${f})`,"stroke-width":2,opacity:.55}));
+  for(const j of J)punkt(s,x(j)+v,y(w[j][k]),f)});
+ let ym=y(l.mv),yd=y(l.de);if(Math.abs(ym-yd)<15){const m=(ym+yd)/2,z=ym>yd?1:-1;ym=m+7.5*z;yd=m-7.5*z}
+ s.append(sv("text",{x:W-38,y:ym+4,class:"w"},nz(l.mv,n)),sv("text",{x:W-38,y:yd+4,class:"w"},nz(l.de,n)));
+ for(const j of J){const r=sv("rect",{x:x(j)-34,y:6,width:68,height:H-34,fill:"transparent"});aktiv(r,`${name}, ${j}`,LAND.map(([k,f,nm])=>[f,nz(w[j][k],n)+ein,`${nm} (SE ${nz(w[j][k+"_se"],1)})`]));s.append(r)}
+ tabelle($("tr-tab"),["Jahr","M-V (SE)","Deutschland (SE)","Regel","Fundstelle M-V"],J.map(j=>[j,`${nz(w[j].mv,1)} (${nz(w[j].mv_se,1)})`,`${nz(w[j].de,1)} (${nz(w[j].de_se,1)})`,w[j].regel,w[j].fund]));
+ /* Übersicht aller Bereiche */
+ const B=D.k9.bereiche.filter(b=>b.id!=="SEK1-0"),V=D.k9.werte[kz],wl=B.flatMap(q=>LAND.flatMap(([k])=>[V[q.id][2024][k]-1.96*V[q.id][2024][k+"_se"],V[q.id][2024][k]+1.96*V[q.id][2024][k+"_se"]]));
+ $("be-titel").textContent="Alle Kompetenzbereiche 2024";
+ const[c,d]=rahmen(wl),[t,W2]=flaeche($("be"),46*B.length+38),H2=46*B.length+38,lb=Math.min(188,W2*.42),xx=skala(c,d,lb+8,W2-12);
+ for(const v of ticks(c,d,W2<400?4:7))t.append(sv("line",{x1:xx(v),x2:xx(v),y1:4,y2:H2-28,stroke:"var(--gr)"}),sv("text",{x:xx(v),y:H2-8,"text-anchor":"middle"},nz(v)));
+ B.forEach((q,i)=>{const yy=26+46*i,o=V[q.id][2024],st=kz==="mittelwert"&&D.k9.sig[q.id][2024];
+  if(q.id===id)t.append(sv("rect",{x:0,y:yy-21,width:W2,height:42,fill:"var(--akbg)"}));
+  t.append(sv("text",{x:6,y:yy+4,class:"w"},q.name+(st?" *":"")));
+  LAND.forEach(([k,f],m)=>{const v=m?8:-8;t.append(sv("line",{x1:xx(o[k]-1.96*o[k+"_se"]),x2:xx(o[k]+1.96*o[k+"_se"]),y1:yy+v,y2:yy+v,stroke:`var(${f})`,"stroke-width":2}));punkt(t,xx(o[k]),yy+v,f)});
+  const r=sv("rect",{x:0,y:yy-21,width:W2,height:42,fill:"transparent",style:"cursor:pointer"});aktiv(r,`${q.name}, 2024`,LAND.map(([k,f,nm])=>[f,nz(o[k],n)+ein,`${nm} (SE ${nz(o[k+"_se"],1)})`]));
+  r.setAttribute("role","button");const w2=()=>{$("f-ber").value=q.id;weg();k9()};r.addEventListener("click",w2);r.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();w2()}});t.append(r)});
+ $("be-hinweis").textContent=(kz==="mittelwert"?"* laut IQB signifikant verschieden von Deutschland (p < .05). ":"Signifikanzangaben sind für diese Kennzahl nicht eingelesen. ")+"Striche: ±1,96 SE. Zeile anklicken, um den Verlauf zu sehen. Achse beginnt nicht bei null.";
+}
+/* ---------- Datenqualität ---------- */
+kacheln($("dq-kacheln"),D.dq.kacheln);
+optionen($("f-q"),[["alle","Alle Quellen"],...D.dq.quellen]);
+function dq(){
+ const kl=$("f-kl").value,z=D.dq.schueler[kl],summe=z.reduce((s,q)=>s+q.wert,0),ohne=z.filter(q=>!q.nur04).reduce((s,q)=>s+q.wert,0),h=34*z.length+8;
+ $("sz-titel").textContent=`Klasse ${kl} in M-V: ${tsd(summe)} oder ${tsd(ohne)} Kinder?`;
+ $("sz-text").textContent=`Destatis nennt in Tabelle 04 ${tsd(summe)} und in Tabelle 07 ${tsd(ohne)}. Die Differenz von ${tsd(summe-ohne)} entspricht genau Förder- und Waldorfschulen.`;
+ const[s,W]=flaeche($("sz"),h),lb=130,x=skala(0,Math.max(...z.map(q=>q.wert)),lb,W-64);
+ z.forEach((q,i)=>{const y=6+34*i,b=Math.max(3,x(q.wert)-lb),r=Math.min(4,b/2);s.append(sv("text",{x:0,y:y+16,class:"w"},q.art),
+  sv("path",{d:`M${lb},${y}h${b-r}a${r},${r} 0 0 1 ${r},${r}v${22-2*r}a${r},${r} 0 0 1 ${-r},${r}h${-(b-r)}z`,fill:`var(${q.nur04?"--s2":"--s1"})`}),sv("text",{x:lb+b+7,y:y+16,class:"w"},tsd(q.wert)));
+  const m=sv("rect",{x:0,y:y-5,width:W,height:32,fill:"transparent"});aktiv(m,`${q.art}, Klasse ${kl}`,[[q.nur04?"--s2":"--s1",tsd(q.wert),q.nur04?"nur in Tabelle 04 enthalten":"in beiden Tabellen enthalten"]]);s.append(m)});
+ const f=$("f-q").value,b=D.dq.befunde.filter(r=>f==="alle"||r[1]===f);
+ $("bf-titel").textContent=`Befunde in den realen Quellen: ${b.length} ${b.length===1?"Eintrag":"Einträge"}`;
+ tabelle($("bf"),["Regel","Quelle","Fundstelle","Rohwert","Befund","Behandlung"],b);
+}
+/* ---------- Simulation ---------- */
+optionen($("f-tl"),D.sim.laenge.map(l=>[l.n,`${l.n} Aufgaben je Leitidee`]));$("f-tl").value="20";
+function sim(){
+ const P=D.sim.profil,h=46*P.length+38,[s,W]=flaeche($("pr"),h),lb=Math.min(290,W*.44),[a,b]=rahmen(P.flatMap(p=>[p.T1[1],p.T1[2],p.T2[1],p.T2[2]])),x=skala(a,b,lb+8,W-12);
+ for(const v of ticks(a,b,W<500?4:7))s.append(sv("line",{x1:x(v),x2:x(v),y1:4,y2:h-28,stroke:"var(--gr)"}),sv("text",{x:x(v),y:h-8,"text-anchor":"middle"},nz(v)+" %"));
+ P.forEach((p,i)=>{const y=26+46*i;s.append(sv("text",{x:0,y:y+4,class:"w"},W<560?p.id:p.id+" "+p.name));
+  [["T1","--s1",-8,"Beginn Klasse 5"],["T2","--s2",8,"Beginn Klasse 6"]].forEach(([t,f,v])=>{s.append(sv("line",{x1:x(p[t][1]),x2:x(p[t][2]),y1:y+v,y2:y+v,stroke:`var(${f})`,"stroke-width":2}));punkt(s,x(p[t][0]),y+v,f)});
+  const r=sv("rect",{x:0,y:y-21,width:W,height:42,fill:"transparent"});aktiv(r,`SIMULIERT, ${p.name}`,[["--s1",nz(p.T1[0],1)+" %","Beginn Klasse 5"],["--s2",nz(p.T2[0],1)+" %","Beginn Klasse 6"],[null,vz(p.diff,1)+" Punkte","Veränderung, gleiche Kinder"]]);s.append(r)});
+ tabelle($("pr-tab"),["Leitidee","Beginn Kl. 5 %","Beginn Kl. 6 %","Veränderung gleiche Kinder"],P.map(p=>[p.id+" "+p.name,nz(p.T1[0],1),nz(p.T2[0],1),vz(p.diff,1)]));
+ const L=D.sim.laenge,n=+$("f-tl").value,g=L.find(l=>l.n===n);
+ kacheln($("sim-kacheln"),[["Aufgaben je Kind",tsd(g.n*5)],["Falsches Band, einzelne Leitidee",nz(g.leit)+" %"],["Falsches Band, Gesamtergebnis",nz(g.ges)+" %"]]);
+ const H=250,[t,W2]=flaeche($("tl"),H),mx=Math.max(...L.map(l=>l.leit))*1.1,xx=skala(0,100,44,W2-50),y=skala(0,mx,H-40,10);
+ for(const v of ticks(0,mx,4))t.append(sv("line",{x1:40,x2:W2-8,y1:y(v),y2:y(v),stroke:"var(--gr)"}),sv("text",{x:34,y:y(v)+4,"text-anchor":"end"},nz(v)+" %"));
+ for(const l of L)t.append(sv("text",{x:xx(l.n),y:H-22,"text-anchor":"middle"},l.n));t.append(sv("text",{x:(44+W2-50)/2,y:H-4,"text-anchor":"middle"},"Aufgaben je Leitidee"));
+ t.append(sv("line",{x1:xx(n),x2:xx(n),y1:8,y2:H-40,stroke:"var(--tx2)"}));
+ for(const[k,f]of[["leit","--s1"],["ges","--s2"]]){t.append(sv("path",{d:"M"+L.map(l=>`${xx(l.n)},${y(l[k])}`).join("L"),fill:"none",stroke:`var(${f})`,"stroke-width":2,"stroke-linejoin":"round"}));
+  for(const l of L)punkt(t,xx(l.n),y(l[k]),f);const e=L.at(-1);t.append(sv("text",{x:xx(e.n)+10,y:y(e[k])+4,class:"w"},nz(e[k])+" %"))}
+ L.forEach((l,i)=>{const li=i?(xx(L[i-1].n)+xx(l.n))/2:40,re=i<L.length-1?(xx(L[i+1].n)+xx(l.n))/2:W2,r=sv("rect",{x:li,y:6,width:re-li,height:H-46,fill:"transparent"});aktiv(r,`SIMULIERT, ${l.n} Aufgaben je Leitidee`,[["--s1",nz(l.leit,1)+" %","falsch, einzelne Leitidee"],["--s2",nz(l.ges,1)+" %","falsch, Gesamtergebnis"]]);t.append(r)});
+ tabelle($("tl-tab"),["Aufgaben je Leitidee","Aufgaben je Kind","falsch, einzelne Leitidee %","falsch, Gesamtergebnis %"],L.map(l=>[l.n,l.n*5,nz(l.leit,1),nz(l.ges,1)]));
+}
+/* ---------- Aussagen ---------- */
+optionen($("f-v"),D.vergleiche.map((v,i)=>[i,v.frage]));
+function urteil(){const v=D.vergleiche[+$("f-v").value],u=$("v-urteil");u.className="urteil "+(v.erlaubt?"ja":"nein");leeren(u).append(el("b",{text:v.erlaubt?"✓ Freigegeben":"✕ Nicht vergleichbar"}),document.createTextNode(v.text))}
+D.aussagen.forEach((l,i)=>$("a-"+(i+1)).append(...l.map(([t,g])=>{const e=el("li",{text:t});if(g)e.append(el("small",{text:g}));return e})));
+/* ---------- Steuerung ---------- */
+const TABS=[["k9",k9],["dq",dq],["sim",sim],["aus",urteil]];
+function tab(id){TABS.forEach(([t])=>{const an=t===id;$(t).hidden=!an;$("t-"+t).setAttribute("aria-selected",an);$("t-"+t).tabIndex=an?0:-1});weg();TABS.find(t=>t[0]===id)[1]()}
+TABS.forEach(([t],i)=>{$("t-"+t).addEventListener("click",()=>tab(t));$("t-"+t).addEventListener("keydown",e=>{const d={ArrowRight:1,ArrowLeft:-1}[e.key];if(d){const z=TABS[(i+d+TABS.length)%TABS.length][0];tab(z);$("t-"+z).focus()}})});
+for(const[i,f]of[["f-ber",k9],["f-kz",k9],["f-kl",dq],["f-q",dq],["f-tl",sim],["f-v",urteil]])$(i).addEventListener("change",f);
+let warte;addEventListener("resize",()=>{clearTimeout(warte);warte=setTimeout(()=>tab(TABS.find(([t])=>!$(t).hidden)[0]),120)});addEventListener("scroll",weg,{passive:true});
+tab("k9");
+</script>
+</body>
+</html>

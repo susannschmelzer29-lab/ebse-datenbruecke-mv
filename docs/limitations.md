@@ -19,6 +19,8 @@
 ## Datenqualität
 - Die Simulationsfehler und die Regeln stammen vom selben Team. Vollständige Erkennung ist erwartbar und kein Beleg für
   Wirksamkeit bei unbekannten Fehlern.
+- Der Abgleich von Destatis und Statistischem Amt M-V zeigt, dass Zahlen konsistent weitergegeben und richtig eingelesen
+  wurden. Vermutlich beruhen beide auf derselben Erhebung, es ist also keine unabhängige Bestätigung.
 - Negative Standardfehler werden verworfen, nicht durch Vorzeichenwechsel „repariert“. Die Ursache ist unbekannt.
 - Die Erklärung der Differenz 15.248 gegen 14.539 ist aus Schularten und Rechnung abgeleitet, nicht aus einer Fußnote.
 - „Gymnasium in Klasse 5/6“ bleibt Warnung: Die Zahlen sind in zwei amtlichen Quellen belegt, die Ausnahme ist fachlich zu klären.

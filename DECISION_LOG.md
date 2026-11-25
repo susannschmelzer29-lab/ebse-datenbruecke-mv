@@ -27,6 +27,7 @@
 | PL-19 | 24.11.2026 | Einzelne Kinder: kein Band je Leitidee, nur Gesamtergebnis, nie alleinige Grundlage für Förderung | Testlängenvergleich (KI-9) |
 | PL-20 | 24.11.2026 | Grenzen ergänzt: Sprache und Lesen, Nachteilsausgleich | fachliche Aussagekraft |
 | PL-21 | 24.11.2026 | Auswertung Klasse 9 nach Kompetenzbereich in den Bericht aufgenommen | gedeckt durch F2 bis F5; Frage statt Ursache |
+| PL-22 | 24.11.2026 | Interaktives Dashboard aus den Ergebnissen entwickeln | statische HTML-Datei im Rahmen von PL-6 |
 
 Die Empfehlungen stammten jeweils vom KI-Assistenten, die Entscheidung von der Projektleitung.
 
@@ -46,6 +47,8 @@ Die Empfehlungen stammten jeweils vom KI-Assistenten, die Entscheidung von der P
 | KI-10 | Darstellung korrigiert: „Bereich berührt Bandgrenze“ (über 80 %) ist nicht „falsch eingestuft“ (rund 26 %) | erste Fassung war missverständlich |
 | KI-11 | Spalte `band` aus `fact_simulation` entfernt, Sicht `v_sim_kind_gesamt` ergänzt | Umsetzung PL-19 im Datenmodell |
 | KI-12 | Signifikanzangaben aus der Quelle eingelesen (Markierung und Fettdruck, Legende wird geprüft) | nicht selbst berechnen |
+| KI-13 | Dashboard nur mit Gruppenwerten; Urteile stammen aus der Vergleichssperre | keine Einzeldatensätze, keine zweite Logik |
+| KI-14 | „unabhängige“ Gegenprobe zu „Gegenprobe“ korrigiert | erste Fassung war zu stark |
 
 ## Offen für die Projektleitung
 

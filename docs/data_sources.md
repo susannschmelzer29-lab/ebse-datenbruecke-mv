@@ -51,7 +51,7 @@ weitergegeben, sondern mit `python -m src.ingestion.fetch` direkt beim Herausgeb
 | Lizenz | „Auszugsweise Vervielfältigung und Verbreitung mit Quellenangabe gestattet.“ |
 | Abruf | [Direktlink](https://www.laiv-mv.de/static/LAIV/Statistik/Dateien/Publikationen/B%20I%20Allgemeinbildende%20Schulen/B%201131/B1131%202025%2000.pdf), ohne Anmeldung |
 | Einschränkungen | PDF, deshalb nur ein enger Ausschnitt; deutsches Zahlenformat |
-| Verwendung | Tabelle 1.9, Jahrgangsstufe 5 und 6, als unabhängige Gegenprobe zu Q1 |
+| Verwendung | Tabelle 1.9, Jahrgangsstufe 5 und 6, als Gegenprobe zu Q1 (vermutlich dieselbe Erhebung) |
 
 ## Simulierte Daten (SIM)
 
